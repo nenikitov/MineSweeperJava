@@ -81,12 +81,15 @@ public class Field {
         this.isPopulated = true;
     }
 	
-	public void print() {
+    @Override
+	public String toString() {
+        String returnResult = "";
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++)
-                System.out.print((tiles[y][x].getMined() ? "X" : ".") + tiles[y][x].getMinesNear() + "\t");
-            System.out.println();
+                returnResult += tiles[y][x] + (tiles[y][x].getMined() ? "X" : ".") + tiles[y][x].getMinesNear() + "\t";
+            returnResult += "\n";
         }
+        return returnResult;
     }
 
     public boolean isValidCoord(int x, int y) {
@@ -108,30 +111,18 @@ public class Field {
     }
     private ArrayList<Integer[]> validIndexesNear(int x, int y) {
         ArrayList<Integer[]> validIndexes = new ArrayList<Integer[]>();
-        // Check top left corner
-        if (isValidCoord(x - 1, y - 1))
-            validIndexes.add(new Integer[] {x - 1, y - 1});
-        // Check top
-        if (isValidCoord(x    , y - 1))
-            validIndexes.add(new Integer[] {x    , y - 1});
-        // Check top right corner
-        if (isValidCoord(x + 1, y - 1))
-            validIndexes.add(new Integer[] {x + 1, y - 1});
-        // Check left side
-        if (isValidCoord(x - 1, y    ))
-            validIndexes.add(new Integer[] {x - 1, y    });
-        // Check right side
-        if (isValidCoord(x + 1, y    ))
-            validIndexes.add(new Integer[] {x + 1, y    });
-        // Check bottom left corner
-        if (isValidCoord(x - 1, y + 1))
-            validIndexes.add(new Integer[] {x - 1, y + 1});
-        // Check bottom
-        if (isValidCoord(x    , y + 1))
-            validIndexes.add(new Integer[] {x    , y + 1});
-        // Check bottom right
-        if (isValidCoord(x + 1, y + 1))
-            validIndexes.add(new Integer[] {x + 1, y + 1});
+
+        // Check the tiles in a 3x3 square pattern
+        for (int offsetX = - 1; offsetX <= 1; offsetX++) {
+            for (int offsetY = - 1; offsetY <= 1; offsetY++) {
+                int coordX = x + offsetX;
+                int coordY = y + offsetY;
+
+                // Add valid index only if it is inside the field and if it is not an initial tile
+                if (isValidCoord(coordX, coordY) && (coordX != x && coordY != y))
+                    validIndexes.add(new Integer[] {coordX, coordY});
+            }
+        }
 
         return validIndexes;
     }
