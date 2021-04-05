@@ -1,21 +1,19 @@
 public class Tile {
+	//#region Fields
     private TileState state;
     private boolean mined;
     private int minesNear;
+	//#endregion
 
+	//#region Constructor
     public Tile(boolean mined, int minesNear) {
         this.state = TileState.CLOSED;
         this.mined = mined;
         this.minesNear = minesNear;
     }
+	//#endregion
 
-    public void setMined() {
-        this.mined = true;
-    }
-    public void setMinesNear(int minesNear) {
-        this.minesNear = minesNear;
-    }
-
+	//#region Tile interaction
     public OpenTileResult open() {
         if (!isInteractable())
             return OpenTileResult.ERROR;
@@ -62,14 +60,18 @@ public class Tile {
         else
             return false;
     }
+	//#endregion
 
+	//#region Getters
     public boolean getMined() {
         return this.mined;
     }
     public int getMinesNear() {
         return this.minesNear;
     }
+	//#endregion
 
+	//#region Other methods
     @Override
     public String toString() {
         switch (this.state) {
@@ -87,8 +89,11 @@ public class Tile {
                 return "-";
         }
     }
+	//#endregion
 
+	//#region Helper methods
     private boolean isInteractable() {
         return !(this.state == TileState.OPENED || this.state == TileState.EXPLODED);
     }
+	//#endregion
 }
