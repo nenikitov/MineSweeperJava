@@ -20,11 +20,17 @@ public class Field {
         this.isPopulated = false;
     }
 
-    public void openTile(int x, int y) {
+    public OpenTileResult openTile(int x, int y) {
         if (!this.isPopulated)
             populateField(coordsToIndex(x, y));
 
-        //TODO opening a tile
+        return tiles[y][x].open();
+    }
+    public boolean markFlagTile(int x, int y) {
+        return tiles[y][x].markFlag();
+    }
+    public boolean markQuestionTile(int x, int y) {
+        return tiles[y][x].markQuestion();
     }
     
     private void populateField(int firstClickLocation) {
@@ -70,14 +76,6 @@ public class Field {
         }
 
         this.isPopulated = true;
-    }
-
-    public void print() {
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++)
-                System.out.print((tiles[y][x].getMined() ? "X" : ".") + tiles[y][x].getMinesNear() + "\t");
-            System.out.println();
-        }
     }
 
     private int[] indexToCoords(int index) {
