@@ -58,11 +58,18 @@ public class Field {
         for (int y = 0; y < this.height; y++) {
             for (int x = 0; x < this.width; x++) {
                 boolean mined = minedTiles[y][x];
+
                 int minesNear = 0;
-                
-                this.tiles[y][x] = new Tile(mined, minesNear)
+                ArrayList<Integer[]> validIndexes = validIndexesNear(x, y);
+                for (Integer[] coords : validIndexes)
+                    if (minedTiles[coords[1]][coords[0]])
+                        minesNear ++;
+
+                this.tiles[y][x] = new Tile(mined, minesNear);
             }
         }
+
+        this.isPopulated = true;
     }
 
 
@@ -71,5 +78,35 @@ public class Field {
     }
     private int coordsToIndex(int x, int y) {
         return x + y * this.width;
+    }
+    private boolean isValidCoord(int x, int y) {
+        if (x < 0 || x > width - 1)
+            return false;
+        else if (y < 0 || y > height - 1)
+            return false;
+        else
+            return true;
+    }
+    private ArrayList<Integer[]> validIndexesNear(int x, int y) {
+        ArrayList<Integer[]> validIndexes = new ArrayList<Integer[]>();
+        
+        if (isValidCoord(x - 1, y - 1))
+            validIndexes.add(new Integer[] {x - 1, y - 1});
+        if (isValidCoord(x    , y - 1))
+            validIndexes.add(new Integer[] {x    , y - 1});
+        if (isValidCoord(x + 1, y - 1))
+            validIndexes.add(new Integer[] {x + 1, y - 1});
+        if (isValidCoord(x - 1, y    ))
+            validIndexes.add(new Integer[] {x - 1, y    });
+        if (isValidCoord(x + 1, y    ))
+            validIndexes.add(new Integer[] {x + 1, y    });
+        if (isValidCoord(x - 1, y + 1))
+            validIndexes.add(new Integer[] {x - 1, y + 1});
+        if (isValidCoord(x    , y + 1))
+            validIndexes.add(new Integer[] {x    , y + 1});
+        if (isValidCoord(x + 1, y + 1))
+            validIndexes.add(new Integer[] {x + 1, y + 1});
+
+        return validIndexes;
     }
 }
