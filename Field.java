@@ -75,7 +75,7 @@ public class Field {
     public void print() {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++)
-                System.out.print(tiles[y][x].getMined() ? "X\t" : ".\t");
+                System.out.print((tiles[y][x].getMined() ? "X" : ".") + tiles[y][x].getMinesNear() + "\t");
             System.out.println();
         }
     }
