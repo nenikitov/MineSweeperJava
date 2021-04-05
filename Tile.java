@@ -30,27 +30,37 @@ public class Tile {
             }
         }
     }
-    public void markFlag() {
-        if (isInteractable())
-        {
+    public boolean markFlag() {
+        if (isInteractable()) {
             if (this.state == TileState.MARKED_FLAG)
                 this.state = TileState.CLOSED;
             else
                 this.state = TileState.MARKED_FLAG;
+
+            return true;
         }
+        else
+            return false;
     }
-    public void markQuestion() {
-        if (isInteractable())
-        {
+    public boolean markQuestion() {
+        if (isInteractable()) {
             if (this.state == TileState.MARKED_QUESTION)
                 this.state = TileState.CLOSED;
             else
                 this.state = TileState.MARKED_QUESTION;
+            
+            return true;
         }
+        else
+            return false;
     }
-    public void markClear() {
-        if (isInteractable())
+    public boolean markClear() {
+        if (isInteractable()) {
             this.state = TileState.CLOSED;
+            return true;
+        }
+        else
+            return false;
     }
 
     public boolean getMined() {
