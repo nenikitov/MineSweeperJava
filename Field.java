@@ -11,6 +11,12 @@ public class Field {
 	//#endregion
 
 	//#region Constructor
+    /**
+     * Initialize the field
+     * @param width The width of the field (in tiles)
+     * @param height The height of the field (in tiles)
+     * @param difficulty The difficulty (Percentage of the mines, from 0 (0%) to 1 (100%))
+     */
     public Field(int width, int height, double difficulty) {
         this.width = width;
         this.height = height;
@@ -21,6 +27,7 @@ public class Field {
     //#endregion
 	
 	//#region Tile generation
+    /** Restart the field and repopulate it with new mines */
 	public void restartField() {
         this.tiles = new Tile[this.height][this.width];
         this.isPopulated = false;
@@ -75,17 +82,44 @@ public class Field {
 	//#endregion
 	
 	//#region Tile interaction
+    /**
+     * Open a tile
+     * @param x The x coordinate of the tile (goes from 0 left to WIDTH - 1 right)
+     * @param y The y coordinate of the tile (goes from 0 top to HEIGHT - 1 bottom)
+     * @return The result (SUCCESS if the tile was correct, EXPLOSION if the tile had a mine, ERROR if the tile can't be opened)
+     */
     public OpenTileResult openTile(int x, int y) {
         if (!this.isPopulated)
             populateField(coordsToIndex(x, y));
 
         return tiles[y][x].open();
     }
+    /**
+     * Mark a tile with a flag (probably there is a mine on the tile)
+     * @param x The x coordinate of the tile (goes from 0 left to WIDTH - 1 right)
+     * @param y The y coordinate of the tile (goes from 0 top to HEIGHT - 1 bottom)
+     * @return The result (TRUE if it can be marked, FALSE if it can't)
+     */
     public boolean markFlagTile(int x, int y) {
         return tiles[y][x].markFlag();
     }
+    /**
+     * Mark a tile with a question mark (there might be a mine on this tile)
+     * @param x The x coordinate of the tile (goes from 0 left to WIDTH - 1 right)
+     * @param y The y coordinate of the tile (goes from 0 top to HEIGHT - 1 bottom)
+     * @return The result (TRUE if it can be marked, FALSE if it can't)
+     */
     public boolean markQuestionTile(int x, int y) {
         return tiles[y][x].markQuestion();
+    }
+    /**
+     * Clear the mark on the tile
+     * @param x The x coordinate of the tile (goes from 0 left to WIDTH - 1 right)
+     * @param y The y coordinate of the tile (goes from 0 top to HEIGHT - 1 bottom)
+     * @return The result (TRUE if it can be cleared, FALSE if it can't)
+     */
+    public boolean markClearTile(int x, int y) {
+        return tiles[y][x].markClear();
     }
     //#endregion
 
@@ -103,6 +137,12 @@ public class Field {
 	//#endregion
 
 	//#region Helper methods
+    /**
+     * Checks if the tile coordinate is valid (if it is inside the valid range from 0 to WIDTH or HEIGHT - 1)
+     * @param x The x coordinate of the tile (goes from 0 left to WIDTH - 1 right)
+     * @param y The y coordinate of the tile (goes from 0 top to HEIGHT - 1 bottom)
+     * @return If the tile coords are valid
+     */
 	public boolean isValidCoord(int x, int y) {
         // Has invalid X coordinate?
         if (x < 0 || x > width - 1)

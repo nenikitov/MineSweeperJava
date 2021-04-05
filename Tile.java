@@ -6,6 +6,11 @@ public class Tile {
 	//#endregion
 
 	//#region Constructor
+    /**
+     * Initialize the tile object
+     * @param mined If the tile has a mine
+     * @param minesNear The number of mines in the adjacent tiles                                      
+     */
     public Tile(boolean mined, int minesNear) {
         this.state = TileState.CLOSED;
         this.mined = mined;
@@ -14,6 +19,10 @@ public class Tile {
 	//#endregion
 
 	//#region Tile interaction
+    /**
+     * Open the tile (reveal the content)
+     * @return The result (SUCCESS if the tile was correct, EXPLOSION if the tile had a mine, ERROR if the tile can't be opened)
+     */
     public OpenTileResult open() {
         if (!isInteractable())
             return OpenTileResult.ERROR;
@@ -28,6 +37,10 @@ public class Tile {
             }
         }
     }
+    /**
+     * Mark the tile with a flag
+     * @return The result (TRUE if it can be marked, FALSE if it can't)
+     */
     public boolean markFlag() {
         if (isInteractable()) {
             if (this.state == TileState.MARKED_FLAG)
@@ -40,6 +53,10 @@ public class Tile {
         else
             return false;
     }
+    /**
+     * Mark the tile with a question mark
+     * @return The result (TRUE if it can be marked, FALSE if it can't)
+     */
     public boolean markQuestion() {
         if (isInteractable()) {
             if (this.state == TileState.MARKED_QUESTION)
@@ -52,6 +69,10 @@ public class Tile {
         else
             return false;
     }
+    /**
+     * Clear all the marks from the tile
+     * @return The result (TRUE if it can be cleared, FALSE if it can't)
+     */
     public boolean markClear() {
         if (isInteractable()) {
             this.state = TileState.CLOSED;
@@ -63,9 +84,17 @@ public class Tile {
 	//#endregion
 
 	//#region Getters
+    /**
+     * Return if the tile contains a mine
+     * @return If the tile is mined
+     */
     public boolean getMined() {
         return this.mined;
     }
+    /**
+     * Gets the number of adjacent tiles that have a mine
+     * @return The number of mines near
+     */
     public int getMinesNear() {
         return this.minesNear;
     }
