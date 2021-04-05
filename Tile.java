@@ -60,6 +60,23 @@ public class Tile {
         return this.minesNear;
     }
 
+    @Override
+    public String toString() {
+        switch (this.state) {
+            case CLOSED:
+                return "C";
+            case EXPLODED:
+                return "E";
+            case MARKED_FLAG:
+                return "F";
+            case MARKED_QUESTION:
+                return "Q";
+            case OPENED:
+                return "O";
+            default:
+                return "-";
+        }
+    }
 
     private boolean isInteractable() {
         return !(this.state == TileState.OPENED || this.state == TileState.EXPLODED);
