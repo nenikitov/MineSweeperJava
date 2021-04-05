@@ -9,8 +9,8 @@ public class Tile {
         this.minesNear = minesNear;
     }
 
-    public void setMined(boolean mined) {
-        this.mined = mined;
+    public void setMined() {
+        this.mined = true;
     }
     public void setMinesNear(int minesNear) {
         this.minesNear = minesNear;
