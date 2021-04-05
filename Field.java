@@ -72,6 +72,13 @@ public class Field {
         this.isPopulated = true;
     }
 
+    public void print() {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++)
+                System.out.print(tiles[y][x].getMined() ? "X\t" : ".\t");
+            System.out.println();
+        }
+    }
 
     private int[] indexToCoords(int index) {
         return new int[] {index % this.width, index / this.width};
