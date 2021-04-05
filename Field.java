@@ -2,12 +2,15 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Field {
+	//#region Fields
     private int width;
     private int height;
     private double difficulty;
     private Tile[][] tiles;
     private boolean isPopulated;
+	//#endregion
 
+	//#region Constructor
     public Field(int width, int height, double difficulty) {
         this.width = width;
         this.height = height;
@@ -15,24 +18,13 @@ public class Field {
         this.tiles = new Tile[height][width];  
         this.isPopulated = false;
     }
-    public void restartField() {
+    //#endregion
+	
+	//#region Tile generation
+	public void restartField() {
         this.tiles = new Tile[this.height][this.width];
         this.isPopulated = false;
     }
-
-    public OpenTileResult openTile(int x, int y) {
-        if (!this.isPopulated)
-            populateField(coordsToIndex(x, y));
-
-        return tiles[y][x].open();
-    }
-    public boolean markFlagTile(int x, int y) {
-        return tiles[y][x].markFlag();
-    }
-    public boolean markQuestionTile(int x, int y) {
-        return tiles[y][x].markQuestion();
-    }
-    
     private void populateField(int firstClickLocation) {
         // Generate all possible tile indexes (as an indexes) to use later to generate mines
         int size = this.width * this.height;
@@ -80,7 +72,24 @@ public class Field {
 
         this.isPopulated = true;
     }
+	//#endregion
 	
+	//#region Tile interaction
+    public OpenTileResult openTile(int x, int y) {
+        if (!this.isPopulated)
+            populateField(coordsToIndex(x, y));
+
+        return tiles[y][x].open();
+    }
+    public boolean markFlagTile(int x, int y) {
+        return tiles[y][x].markFlag();
+    }
+    public boolean markQuestionTile(int x, int y) {
+        return tiles[y][x].markQuestion();
+    }
+    //#endregion
+
+	//#region Other methods
     @Override
 	public String toString() {
         String returnResult = "";
@@ -91,8 +100,10 @@ public class Field {
         }
         return returnResult;
     }
+	//#endregion
 
-    public boolean isValidCoord(int x, int y) {
+	//#region Helper methods
+	public boolean isValidCoord(int x, int y) {
         // Has invalid X coordinate?
         if (x < 0 || x > width - 1)
             return false;
@@ -102,8 +113,8 @@ public class Field {
         // All checks passed, it is valid
         return true;
     }
-
-    private int[] indexToCoords(int index) {
+    
+	private int[] indexToCoords(int index) {
         return new int[] {index % this.width, index / this.width};
     }
     private int coordsToIndex(int x, int y) {
@@ -126,4 +137,5 @@ public class Field {
 
         return validIndexes;
     }
+	//#endregion
 }
