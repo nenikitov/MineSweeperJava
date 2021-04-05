@@ -17,7 +17,7 @@ public class Tile {
     }
 
     public OpenTileResult open() {
-        if (this.state == TileState.OPENED || this.state == TileState.EXPLODED)
+        if (!isInteractable())
             return OpenTileResult.ERROR;
         else {
             if (this.mined) {
@@ -30,11 +30,38 @@ public class Tile {
             }
         }
     }
+    public void markFlag() {
+        if (isInteractable())
+        {
+            if (this.state == TileState.MARKED_FLAG)
+                this.state = TileState.CLOSED;
+            else
+                this.state = TileState.MARKED_FLAG;
+        }
+    }
+    public void markQuestion() {
+        if (isInteractable())
+        {
+            if (this.state == TileState.MARKED_QUESTION)
+                this.state = TileState.CLOSED;
+            else
+                this.state = TileState.MARKED_QUESTION;
+        }
+    }
+    public void markClear() {
+        if (isInteractable())
+            this.state = TileState.CLOSED;
+    }
 
     public boolean getMined() {
         return this.mined;
     }
     public int getMinesNear() {
         return this.minesNear;
+    }
+
+
+    private boolean isInteractable() {
+        return !(this.state == TileState.OPENED || this.state == TileState.EXPLODED);
     }
 }
