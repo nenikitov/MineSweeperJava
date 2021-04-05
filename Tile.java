@@ -16,6 +16,21 @@ public class Tile {
         this.minesNear = minesNear;
     }
 
+    public OpenTileResult open() {
+        if (this.state == TileState.OPENED || this.state == TileState.EXPLODED)
+            return OpenTileResult.ERROR;
+        else {
+            if (this.mined) {
+                this.state = TileState.EXPLODED;
+                return OpenTileResult.EXPLOSION;
+            }
+            else {
+                this.state = TileState.OPENED;
+                return OpenTileResult.SUCCESS;
+            }
+        }
+    }
+
     public boolean getMined() {
         return this.mined;
     }
