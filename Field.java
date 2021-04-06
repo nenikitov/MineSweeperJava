@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Random;
 
 public class Field {
@@ -37,6 +39,7 @@ public class Field {
         int size = this.width * this.height;
         ArrayList<Integer> possibleMineIndexes = new ArrayList<Integer>();
 
+        // Generate consecutive numbers to avoid repetition in mine generation
         for (int i = 0; i < size; i++)
             possibleMineIndexes.add(i);
 
@@ -44,13 +47,7 @@ public class Field {
         possibleMineIndexes.remove(firstClickLocation);
 
         // Shuffle the indexes
-        Random rand = new Random();
-        for (int i = 0; i < size - 1; i++) {
-            int temp = possibleMineIndexes.get(i);
-            int randomIndex = rand.nextInt(size - 1);
-            possibleMineIndexes.set(i, possibleMineIndexes.get(randomIndex));
-            possibleMineIndexes.set(randomIndex, temp);
-        }
+        Collections.shuffle(possibleMineIndexes);
 
         // Pick the first indexes and gemerate a boolean array putting the mines at those indexes
         int mineCount = (int)(this.difficulty * size);
@@ -67,11 +64,7 @@ public class Field {
                 // The tile is mined if the same index is TRUE inside the boolean array
                 boolean mined = minedTiles[y][x];
                 // The number of mines near is calculated by going through each valid tile nearby, checking if it should contain a mine
-                int minesNear = 0;
-                ArrayList<Integer[]> validIndexes = validIndexesNear(x, y);
-                for (Integer[] coords : validIndexes)
-                    if (minedTiles[coords[1]][coords[0]])
-                        minesNear ++;
+                int minesNear = countMinesNear(minedTiles, x, y);
                 // Initialize the tile
                 this.tiles[y][x] = new Tile(mined, minesNear);
             }
@@ -153,7 +146,14 @@ public class Field {
         // All checks passed, it is valid
         return true;
     }
-    
+    private int countMinesNear(boolean[][] minedTiles, int x, int y) {
+        int counter = 0;
+        ArrayList<Integer[]> validIndexes = validIndexesNear(x, y);
+        for (Integer[] coords : validIndexes)
+            if (minedTiles[coords[1]][coords[0]])
+                counter++;
+        return counter;
+    }
 	private int[] indexToCoords(int index) {
         return new int[] {index % this.width, index / this.width};
     }
@@ -164,8 +164,8 @@ public class Field {
         ArrayList<Integer[]> validIndexes = new ArrayList<Integer[]>();
 
         // Check the tiles in a 3x3 square pattern
-        for (int offsetX = - 1; offsetX <= 1; offsetX++) {
-            for (int offsetY = - 1; offsetY <= 1; offsetY++) {
+        for (int offsetY = - 1; offsetY <= 1; offsetY++) {
+            for (int offsetX = - 1; offsetX <= 1; offsetX++) {
                 int coordX = x + offsetX;
                 int coordY = y + offsetY;
 
