@@ -2,7 +2,6 @@ public class MineSweeper {
     public static void main(String[] args) {
 
         // Maybe implement difficulties?
-        // I'm too Young to Explode
         // Piece of Cake
         // Mine Me Plenty
         // Thou Art a Defuse Meister
