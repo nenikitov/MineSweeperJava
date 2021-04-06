@@ -9,12 +9,8 @@ public class MineSweeper {
         // Minecore!
         // Custom
 
-        Field field = new Field(10,5,0.2);
-        field.openTile(0, 0);
-        field.openTile(1, 0);
-        field.openTile(2, 0);
-        field.openTile(3, 0);
+        Player player = new Player(1);
 
-        System.out.println(field);
+        System.out.println(player.promptNumber(5));
     }
 }
