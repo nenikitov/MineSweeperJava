@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Field {
+public class MineField {
 	//#region Fields
     private int width;
     private int height;
@@ -17,7 +17,7 @@ public class Field {
      * @param height The height of the field (in tiles)
      * @param difficulty The difficulty (Percentage of the mines, from 0 (0%) to 1 (100%))
      */
-    public Field(int width, int height, double difficulty) {
+    public MineField(int width, int height, double difficulty) {
         this.width = width;
         this.height = height;
         this.difficulty = difficulty;
