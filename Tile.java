@@ -83,23 +83,6 @@ public class Tile {
     }
 	//#endregion
 
-	//#region Getters
-    /**
-     * Return if the tile contains a mine
-     * @return If the tile is mined
-     */
-    public boolean getMined() {
-        return this.mined;
-    }
-    /**
-     * Gets the number of adjacent tiles that have a mine
-     * @return The number of mines near
-     */
-    public int getMinesNear() {
-        return this.minesNear;
-    }
-	//#endregion
-
 	//#region Other methods
     @Override
     public String toString() {

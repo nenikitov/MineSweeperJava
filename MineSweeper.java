@@ -6,11 +6,14 @@ public class MineSweeper {
         // Mine Me Plenty
         // Thou Art a Defuse Meister
         // They Call Me "The Mine Sweeper"
+		// Ulta mine field
         // Minecore!
         // Custom
 
         Player player = new Player(1);
+        MineField mineField = new MineField(10, 20, 0.2);
 
-        System.out.println(player.promptNumber(5));
+        mineField.openTile(0, 0);
+        System.out.println(mineField);
     }
 }

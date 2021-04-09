@@ -120,7 +120,7 @@ public class MineField {
         String returnResult = "";
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++)
-                returnResult += tiles[y][x] + (tiles[y][x].getMined() ? "X" : ".") + tiles[y][x].getMinesNear() + "\t";
+                returnResult += tiles[y][x] + "\t";
             returnResult += "\n";
         }
         return returnResult;
