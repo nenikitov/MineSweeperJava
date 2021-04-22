@@ -57,7 +57,27 @@ public class Tile {
     }
 
     public String toString() {
+        String output = "[";
+        switch (this.state) {
+            case CLOSED:
+                output += '■';
+                break;
+            case OPENED:
+                output += this.minesNear;
+                break;
+            case EXPLODED:
+                output += 'X';
+                break;
+            case MARKED_FLAG:
+                output += 'P';
+                break;
+            case MARKED_QUESTION:
+                output += '?';
+                break;
+        }
+        output += "]\t";
 
+        return output;
     }
 
     private boolean isInteractable() {
