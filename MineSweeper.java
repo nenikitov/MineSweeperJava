@@ -1,8 +1,6 @@
 public class MineSweeper {
     public static void main(String[] args) {
-        Tile tile = new Tile(true, 0);
-        tile.markQuestion();
-        tile.open();
-        System.out.println(tile);
-    }    
+        MineField mineField = new MineField(6, 4, 0.25);
+        mineField.populateField(0, 0);
+    }
 }
