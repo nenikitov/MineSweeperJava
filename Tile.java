@@ -3,8 +3,8 @@ public class Tile {
     private boolean mined;
     private int minesNear;
 
-    public Tile(TileStates state, boolean mined, int minesNear) {
-        this.state = state;
+    public Tile(boolean mined, int minesNear) {
+        this.state = TileStates.CLOSED;
         this.mined = mined;
         this.minesNear = minesNear;
     }
@@ -75,7 +75,7 @@ public class Tile {
                 output += '?';
                 break;
         }
-        output += "]\t";
+        output += "] ";
 
         return output;
     }
