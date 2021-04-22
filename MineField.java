@@ -15,7 +15,7 @@ public class MineField {
         this.isPopulated = false;
     }
 
-    public void populateField(int excludeX, int excludeY) {
+    private void populateField(int excludeX, int excludeY) {
         // Generate the array of all possible indexes where the mine can be places (except the exclude coodinate - first move)
         int excludeIndex = coordsToIndex(excludeX, excludeY);
         int[] possibleTileIndexes = new int[this.width * this.height - 1];
@@ -43,18 +43,29 @@ public class MineField {
 
         // Generate a 2d int array that stores the info about the number of mines near a tile
         int[][] minesNear = new int[this.height][this.width];
-        for (int y = 0; y < this.height; y++) {
-            for (int x = 0; x < this.width; x++) {
+        for (int y = 0; y < this.height; y++)
+            for (int x = 0; x < this.width; x++)
                 minesNear[y][x] = this.countMinesNear(x, y, minedTiles);
-                System.out.print(minedTiles[y][x] + "\t" + minesNear[y][x] + "\t\t");
-            }
-            System.out.println();
-        }
+
+        // Initialize all the tiles
+        for (int y = 0; y < this.height; y++)
+            for (int x = 0; x < this.width; x++)
+                tiles[y][x] = new Tile(minedTiles[y][x], minesNear[y][x]);
+        
+        this.isPopulated = true;
+    }
+
+    public TileInteractionResults openAt(int x, int y) {
+        // Check if the coord is inside the field
+        if (!isValidCoord(x, y))
+            return TileInteractionResults.INVALID_COORD;
+        
+        if (!this.isPopulated)
+            this.populateField(x, y);
+
+        return tiles[y][x].open();
     }
     /*
-    public TileInteractionResults openAt(int x, int y) {
-
-    }
     public TileInteractionResults markFlagAt(int x, int y) {
 
     }
@@ -64,11 +75,23 @@ public class MineField {
     public TileInteractionResults markClearAt(int x, int y) {
 
     }
+    */
 
     public String toString() {
+        String output = "";
+        for (int y = 0; y < this.height; y++) {
+            for (int x = 0; x < this.width; x++) {
+                if (this.isPopulated)
+                    output += tiles[y][x];
+                else
+                   output += "[■] ";
+            }
+            output += "\n";
+        }
 
+        return output;
     }
-    */
+    
     private boolean isValidCoord(int x, int y) {
         return (x >= 0 && x < width) && (y >= 0 && y < height);
     }

@@ -1,6 +1,11 @@
 public class MineSweeper {
     public static void main(String[] args) {
-        MineField mineField = new MineField(6, 4, 0.25);
-        mineField.populateField(0, 0);
+        MineField mineField = new MineField(10, 5, 0.25);
+
+        for (int y = 0; y < 5; y++)
+            for (int x = 0; x < 10; x++)
+                mineField.openAt(x, y);
+
+        System.out.println(mineField);
     }
 }

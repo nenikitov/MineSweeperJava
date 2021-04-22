@@ -93,7 +93,7 @@ public class Tile {
                     output += this.minesNear;
                 break;
             case EXPLODED:
-                output += 'X';
+                output += '*';
                 break;
             case MARKED_FLAG:
                 output += 'P';
