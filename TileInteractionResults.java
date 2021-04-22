@@ -1,4 +1,4 @@
-public enum TileInteractionResult {
+public enum TileInteractionResults {
     SUCCESS,
     EXPLOSION,
     INVALID_TILE,
