@@ -35,16 +35,16 @@ public class MineField {
     }
 
     private boolean isValidCoord(int x, int y) {
-
+        return (x >= 0 && x < width) && (y >= 0 && y < height);
     }
     private int countMinesNear(int x, int y, boolean[][] minedTiles) {
 
     }
     private int[] indexToCoords(int index) {
-
+        return new int[] { index % width, index / width }; 
     }
     private int coordsToIndex(int x, int y) {
-
+        return y * width + x;
     }
     private int[][] validIndexesNear(int x, int y) {
 
