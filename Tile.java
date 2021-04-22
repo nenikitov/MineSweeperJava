@@ -4,12 +4,17 @@ public class Tile {
     private int minesNear;
 
     /**
-     * Initialize the tile object
+     * Initialize a dummy tile object
+     */
+    public Tile() {
+        this.state = TileStates.CLOSED;
+    }
+    /**
+     * Initialize the tile
      * @param mined If the tile contains a mine
      * @param minesNear The number of adjacent tiles that have mines
      */
-    public Tile(boolean mined, int minesNear) {
-        this.state = TileStates.CLOSED;
+    public void populate(boolean mined, int minesNear) {
         this.mined = mined;
         this.minesNear = minesNear;
     }

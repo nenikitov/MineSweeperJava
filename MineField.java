@@ -11,8 +11,11 @@ public class MineField {
         this.width = width;
         this.height = height;
         this.difficulty = difficulty;
-        this.tiles = new Tile[height][width];
         this.isPopulated = false;
+        this.tiles = new Tile[height][width];
+        for (int y = 0; y < height; y++)
+            for (int x = 0; x < width; x++)
+                this.tiles[y][x] = new Tile();
     }
 
     private void populateField(int excludeX, int excludeY) {
@@ -50,7 +53,7 @@ public class MineField {
         // Initialize all the tiles
         for (int y = 0; y < this.height; y++)
             for (int x = 0; x < this.width; x++)
-                tiles[y][x] = new Tile(minedTiles[y][x], minesNear[y][x]);
+                tiles[y][x].populate(minedTiles[y][x], minesNear[y][x]);
         
         this.isPopulated = true;
     }
@@ -94,12 +97,10 @@ public class MineField {
 
     public String toString() {
         String output = "";
+        // Go through each tile
         for (int y = 0; y < this.height; y++) {
             for (int x = 0; x < this.width; x++) {
-                if (this.isPopulated)
-                    output += tiles[y][x];
-                else
-                   output += "[■] ";
+                output += tiles[y][x];
             }
             output += "\n";
         }
@@ -112,10 +113,13 @@ public class MineField {
     }
     private int countMinesNear(int x, int y, boolean[][] minedTiles) {
         int minesNear = 0;
+        // Go through each tile which is inside 3x3 square centered aroung the target tile
         for (int deltaY = -1; deltaY < 2; deltaY++) {
             for (int deltaX = -1; deltaX < 2; deltaX++) {
+                // Caclulate its coordinates
                 int checkX = x + deltaX;
                 int checkY = y + deltaY;
+                // If it is valid (inside the field) and if it contains a mine - increment the counter
                 if (isValidCoord(checkX, checkY)) {
                     if (minedTiles[checkY][checkX])
                         minesNear++;
@@ -130,11 +134,4 @@ public class MineField {
     private int coordsToIndex(int x, int y) {
         return y * width + x;
     }    
-    private boolean[][] validCoordsNear(int x, int y) {
-        boolean[][] output = new boolean[3][3];
-        for (int checkY = 0; checkY < 3; checkY++)
-            for (int checkX = 0; checkX < 3; checkX++)
-                output[y][x] = isValidCoord(checkX - 1, checkY - 1);
-        return output;
-    }
 }
