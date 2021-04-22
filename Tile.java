@@ -63,7 +63,10 @@ public class Tile {
                 output += '■';
                 break;
             case OPENED:
-                output += this.minesNear;
+                if (this.minesNear == 0)
+                    output += " ";
+                else
+                    output += this.minesNear;
                 break;
             case EXPLODED:
                 output += 'X';
