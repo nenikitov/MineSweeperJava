@@ -24,13 +24,36 @@ public class Tile {
             return TileInteractionResults.INVALID_TILE;
     }
     public TileInteractionResults markFlag() {
+        if (this.isInteractable()) {
+            if (this.state == TileStates.MARKED_FLAG)
+                this.state = TileStates.CLOSED;
+            else
+                this.state = TileStates.MARKED_FLAG;
 
+            return TileInteractionResults.SUCCESS;
+        }
+        else
+            return TileInteractionResults.INVALID_TILE;
     }
     public TileInteractionResults markQuestion() {
+        if (this.isInteractable()) {
+            if (this.state == TileStates.MARKED_QUESTION)
+                this.state = TileStates.CLOSED;
+            else
+                this.state = TileStates.MARKED_QUESTION;
 
+            return TileInteractionResults.SUCCESS;
+        }
+        else
+            return TileInteractionResults.INVALID_TILE;
     }
     public TileInteractionResults markClear() {
-
+        if (this.isInteractable()) {
+            this.state = TileStates.CLOSED;
+            return TileInteractionResults.SUCCESS;
+        }
+        else
+            return TileInteractionResults.INVALID_TILE;
     }
 
     public String toString() {
