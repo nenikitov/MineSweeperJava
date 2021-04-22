@@ -10,7 +10,18 @@ public class Tile {
     }
 
     public TileInteractionResults open() {
-
+        if (this.isInteractable()) {
+            if (mined) {
+                this.state = TileStates.EXPLODED;
+                return TileInteractionResults.EXPLOSION;
+            }
+            else {
+                this.state = TileStates.OPENED;
+                return TileInteractionResults.SUCCESS;
+            }
+        }
+        else
+            return TileInteractionResults.INVALID_TILE;
     }
     public TileInteractionResults markFlag() {
 
@@ -27,6 +38,6 @@ public class Tile {
     }
 
     private boolean isInteractable() {
-        
+        return this.state != TileStates.EXPLODED && this.state != TileStates.OPENED;
     }
 }
