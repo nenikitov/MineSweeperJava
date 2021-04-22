@@ -59,23 +59,38 @@ public class MineField {
         // Check if the coord is inside the field
         if (!isValidCoord(x, y))
             return TileInteractionResults.INVALID_COORD;
-        
+       
+        // If it is the first move - generate mines
         if (!this.isPopulated)
             this.populateField(x, y);
 
+        // Open the tile
         return tiles[y][x].open();
     }
-    /*
     public TileInteractionResults markFlagAt(int x, int y) {
-
+        // Check if the coord is inside the field
+        if (!isValidCoord(x, y))
+            return TileInteractionResults.INVALID_COORD;
+       
+        // Mark the tile with a flag
+        return tiles[y][x].markFlag();
     }
     public TileInteractionResults markQuestionAt(int x, int y) {
-
+        // Check if the coord is inside the field
+        if (!isValidCoord(x, y))
+            return TileInteractionResults.INVALID_COORD;
+       
+        // Mark the tile with a question
+        return tiles[y][x].markQuestion();
     }
     public TileInteractionResults markClearAt(int x, int y) {
-
+        // Check if the coord is inside the field
+        if (!isValidCoord(x, y))
+            return TileInteractionResults.INVALID_COORD;
+       
+        // Clear the marks from the tile
+        return tiles[y][x].markClear();
     }
-    */
 
     public String toString() {
         String output = "";
