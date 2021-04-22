@@ -7,6 +7,12 @@ public class MineField {
     private Tile[][] tiles;
     private boolean isPopulated;
 
+    /**
+     * Initialize the mine field object
+     * @param widt The width of a playing field
+     * @param height The height of a playing field
+     * @param difficulty The difficulty (percentage from 0 to 1) that indicated the mine count
+     */
     public MineField(int width, int height, double difficulty) {
         this.width = width;
         this.height = height;
@@ -58,6 +64,12 @@ public class MineField {
         this.isPopulated = true;
     }
 
+    /**
+     * Open the tile at specific coordinates
+     * @param x X coordinate
+     * @param y Y coordinate
+     * @return The result of the interaction {@link TileInteractionResults}
+     */
     public TileInteractionResults openAt(int x, int y) {
         // Check if the coord is inside the field
         if (!isValidCoord(x, y))
@@ -70,6 +82,12 @@ public class MineField {
         // Open the tile
         return tiles[y][x].open();
     }
+    /**
+     * Mark with a flag the tile at specific coordinates
+     * @param x X coordinate
+     * @param y Y coordinate
+     * @return The result of the interaction {@link TileInteractionResults}
+     */
     public TileInteractionResults markFlagAt(int x, int y) {
         // Check if the coord is inside the field
         if (!isValidCoord(x, y))
@@ -78,6 +96,12 @@ public class MineField {
         // Mark the tile with a flag
         return tiles[y][x].markFlag();
     }
+    /**
+     * Mark with a question mark the tile at specific coordinates
+     * @param x X coordinate
+     * @param y Y coordinate
+     * @return The result of the interaction {@link TileInteractionResults}
+     */
     public TileInteractionResults markQuestionAt(int x, int y) {
         // Check if the coord is inside the field
         if (!isValidCoord(x, y))
@@ -86,6 +110,12 @@ public class MineField {
         // Mark the tile with a question
         return tiles[y][x].markQuestion();
     }
+    /**
+     * Clear marks the tile at specific coordinates
+     * @param x X coordinate
+     * @param y Y coordinate
+     * @return The result of the interaction {@link TileInteractionResults}
+     */
     public TileInteractionResults markClearAt(int x, int y) {
         // Check if the coord is inside the field
         if (!isValidCoord(x, y))
@@ -95,6 +125,9 @@ public class MineField {
         return tiles[y][x].markClear();
     }
 
+    /** 
+     * Converts the mine field to readable format
+    */
     public String toString() {
         String output = "";
         // Go through each tile
