@@ -88,7 +88,8 @@ public class Tile {
     public String toString() {
         String output = "[";
 
-        if (this.state == TileStates.OPENED && this.minesNear != 0)
+        // Display numbers for the opened tiles that have more than 0 mines nearby
+        if (this.state == TileStates.OPENED && this.minesNear > 0)
             output += this.minesNear;
         else
             output += this.state;
