@@ -12,7 +12,7 @@ public class MineSweeper {
 
         for (int y = 0; y < 5; y++)
             for (int x = 0; x < 10; x++)
-                mineField.markFlagAt(x, y);
+                mineField.openAt(x, y);
 
         System.out.println(mineField);
     }

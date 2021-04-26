@@ -87,26 +87,12 @@ public class Tile {
     */
     public String toString() {
         String output = "[";
-        switch (this.state) {
-            case CLOSED:
-                output += '■';
-                break;
-            case OPENED:
-                if (this.minesNear == 0)
-                    output += " ";
-                else
-                    output += this.minesNear;
-                break;
-            case EXPLODED:
-                output += '*';
-                break;
-            case MARKED_FLAG:
-                output += 'P';
-                break;
-            case MARKED_QUESTION:
-                output += '?';
-                break;
-        }
+
+        if (this.state == TileStates.OPENED && this.minesNear != 0)
+            output += this.minesNear;
+        else
+            output += this.state;
+
         output += "] ";
 
         return output;
