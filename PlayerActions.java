@@ -16,9 +16,17 @@ public enum PlayerActions {
         this.attributes = attributes;
     }
 
+    /**
+     * Get the aliases of the command (strings that can be used to call the player action)
+     * @return Aliases 
+     */
     public String[] getAliases() {
         return this.aliases;
     }
+    /**
+     * Get the number of arguments that the command needs to execute correctly
+     * @return Number of arguments
+     */
     public int getAttributeNumber() {
         return this.attributes;
     }
