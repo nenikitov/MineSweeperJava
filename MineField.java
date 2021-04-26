@@ -126,7 +126,7 @@ public class MineField {
     }
 
     /** 
-     * Converts the mine field to readable format
+     * Convert the mine field to readable format
     */
     public String toString() {
         String output = "";

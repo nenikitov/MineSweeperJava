@@ -83,7 +83,7 @@ public class Tile {
     }
 
     /** 
-     * Converts the tile to readable format
+     * Convert the tile to readable format
     */
     public String toString() {
         String output = "[";

@@ -11,6 +11,9 @@ public enum TileStates {
         this.displayChar = displayChar;
     }
 
+    /**
+     * Convert the tile type to character that will be displayed in the minefield
+     */
     public String toString() {
         return Character.toString(this.displayChar);
     }
