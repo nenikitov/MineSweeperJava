@@ -152,6 +152,11 @@ public class MineField {
 
         return output;
     }
+    /**
+     * Verifies if the instruction can be executed in the minefield
+     * @param instruction The data of the game instruction {@link GameInstructionData}
+     * @return If the instruction can be executed
+     */
     public boolean isValidInstructionData(GameInstructionData instruction) {
         switch (instruction.getType()) {
             case TILE_MARK_CLEAR: case TILE_MARK_FLAG: case TILE_MARK_QUESTION: case TILE_OPEN:

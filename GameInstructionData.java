@@ -19,6 +19,27 @@ public class GameInstructionData {
     }
     //#endregion
 
+    //#region Getters
+    /**
+     * Get the type of the current action
+     * @return The type {@link GameCommands}
+     */
+    public GameCommands getType() {
+        return this.type;
+    }
+    /**
+     * Get the arguments that are passed with the action
+     * @return The arguments
+     */
+    public String[] getArguments() {
+        return this.arguments;
+    }
+    //#endregion
+
+    //#region Attribute manipulation
+    /**
+     * Try to figure out which argument is X, which attribute is Y coordinate, transform it into numbers from 0 to 1 and save it
+     */
     public void transformArgumentsToCoords() {
         //#region Check if there is a correct number of arguments
         if (this.arguments.length != 2)
@@ -52,22 +73,6 @@ public class GameInstructionData {
             arguments[0] = Integer.toString(alphabetArgument1);
             arguments[1] = Integer.toString(numberArgument0 - 1);
         }
-    }
-
-    //#region Getters
-    /**
-     * Get the type of the current action
-     * @return The type {@link GameCommands}
-     */
-    public GameCommands getType() {
-        return this.type;
-    }
-    /**
-     * Get the arguments that are passed with the action
-     * @return The arguments
-     */
-    public String[] getArguments() {
-        return this.arguments;
     }
     //#endregion
 }
