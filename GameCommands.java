@@ -22,7 +22,7 @@ public enum GameCommands {
     }
     //#endregion
 
-    //#region Getters    
+    //#region Getters
     /**
      * Get the aliases of the command (strings that can be used to call the game commands)
      * @return Aliases 
