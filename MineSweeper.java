@@ -25,35 +25,71 @@ public class MineSweeper {
                 instruction = inputHandler.promptGameInstruction();
             }
             
-            int x = 0;
-            int y = 0;
-
-            if (instruction.getArguments().length >= 2) {
-                x = InputHandler.parseFromNumber(instruction.getArguments()[0]);
-                y = InputHandler.parseFromNumber(instruction.getArguments()[1]);
-            }
-
             switch (instruction.getType()) {
-                case GAME_HELP:
+                case GAME_HELP: {
                     break;
-                case GAME_INSTANT_RETRY:
+                }
+                case GAME_INSTANT_RETRY: {
                     break;
-                case GAME_QUIT:
+                }
+                case GAME_QUIT: {
+                    inputHandler.promptBoolean();
                     break;
-                case GAME_RESTART:
+                }
+                case GAME_RESTART: {
                     break;
-                case TILE_MARK_CLEAR:
-                    mineField.markClearAt(x, y);
+                }
+                case TILE_MARK_CLEAR: {
+                    // Get coords of the input
+                    int x = InputHandler.parseFromNumber(instruction.getArguments()[0]);
+                    int y = InputHandler.parseFromNumber(instruction.getArguments()[1]);
+                    // Execute and get the result
+                    TileInteractionResults interactionResult = mineField.markClearAt(x, y);
+                    //#region Print the confirmation message
+                    if (interactionResult == TileInteractionResults.INVALID_TILE)
+                        System.out.println("You cannot clear the marks of this tile, it is not interactable. This turn is skipped...");
+                    else if (interactionResult == TileInteractionResults.SUCCESS)
+                        System.out.println("Sucessfully cleared all the marks from this tile...");
+                    //#endregion
                     break;
-                case TILE_MARK_FLAG:
-                    mineField.markFlagAt(x, y);
+                }
+                case TILE_MARK_FLAG: {
+                    // Get coords of the input
+                    int x = InputHandler.parseFromNumber(instruction.getArguments()[0]);
+                    int y = InputHandler.parseFromNumber(instruction.getArguments()[1]);
+                    // Execute and get the result
+                    TileInteractionResults interactionResult = mineField.markFlagAt(x, y);
+                    //#region Print the confirmation message
+                    if (interactionResult == TileInteractionResults.INVALID_TILE)
+                        System.out.println("You cannot mark this tile with a flag, it is not interactable. This turn is skipped...");
+                    else if (interactionResult == TileInteractionResults.SUCCESS)
+                        System.out.println("Sucessfully marked this tile with a flag...");
+                    //#endregion
                     break;
-                case TILE_MARK_QUESTION:
-                    mineField.markQuestionAt(x, y);
+                }
+                case TILE_MARK_QUESTION: {
+                    // Get coords of the input
+                    int x = InputHandler.parseFromNumber(instruction.getArguments()[0]);
+                    int y = InputHandler.parseFromNumber(instruction.getArguments()[1]);
+                    // Execute and get the result
+                    TileInteractionResults interactionResult = mineField.markQuestionAt(x, y);
+                    //#region Print the confirmation message
+                    if (interactionResult == TileInteractionResults.INVALID_TILE)
+                        System.out.println("You cannot mark this tile with a question, it is not interactable. This turn is skipped...");
+                    else if (interactionResult == TileInteractionResults.SUCCESS)
+                        System.out.println("Sucessfully marked this tile with a question...");
+                    //#endregion
                     break;
-                case TILE_OPEN:
-                    mineField.openAt(x, y);
+                }
+                case TILE_OPEN: {
+                    // Get coords of the input
+                    int x = InputHandler.parseFromNumber(instruction.getArguments()[0]);
+                    int y = InputHandler.parseFromNumber(instruction.getArguments()[1]);
+                    // Execute and get the result
+                    TileInteractionResults interactionResult = mineField.openAt(x, y);
+                    //#region Print the confirmation message
                     break;
+                }
             }
         }
     }
