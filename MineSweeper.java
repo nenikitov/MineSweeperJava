@@ -14,7 +14,7 @@ public class MineSweeper {
 		MineField mineField = new MineField(15, 7, 0.15);
 		InputHandler inputHandler = new InputHandler();
 
-		System.out.println(InputHandler.parseToAlphabetNumber(664));
+		System.out.println(InputHandler.parseFromAlphabetNumber("ba"));
 		/*
 		while (true) {
 			System.out.println(mineField);

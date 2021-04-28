@@ -109,47 +109,72 @@ public class InputHandler {
     //#endregion
 
     //#region Info parsing methods
+    /**
+     * Parse a String to integer (WARNING: doesn't support negative numbers)
+     * @param text String representation of the number
+     * @return Integer representing the number (-1 if error)
+     */
     public static int parseFromNumber(String text) {
+        // If the string isn't a number - return error (-1)
         if (!isNumber(text))
             return -1;
 
         int output = 0;
         int powers = text.length() - 1;
-
+        // For each character
         for (int i = 0; i < text.length(); i++) {
             int currentNumber = text.charAt(i) - '0';
+            // Add it to result (paying attention to the power)
             output += Math.pow(10, powers - i) * currentNumber;
         }
+        // Return final result
         return output;
     }
+    /**
+     * Parse a String to integer (WARNING: doesn't support negative numbers)
+     * @param text String representation of the number in alphabetic form (a - 0, z - 25, aa - 26)
+     * @return Integer representing the number (-1 if error)
+     */
     public static int parseFromAlphabetNumber(String text) {
+        // If the string isn't a number - return error (-1)
         if (!isAlphabetNumber(text))
             return -1;
 
         int ouptut = 0;
         int powers = text.length() - 1;
-
+        // For each character
         for (int i = 0; i < text.length(); i++) {
             int currentNumber = text.charAt(i) - 'a' + 1;
+            // Add it to result (paying attention to the power)
             ouptut += Math.pow(26, powers - i) * currentNumber;
         }
+        // Return final result (the additional math is done to make the output more readable)
         return ouptut - 1;
     }
+    /**
+     * Transform integer to String representation of the number (WARNING: doesn't support negative numbers)
+     * @param number Integer representing the number
+     * @return String representation of the number in alphabetic form (a - 0, z - 25, aa - 26)
+     */
     public static String parseToAlphabetNumber(int number) {
         if (number < 0)
+        // If the number is invalid - return error (empty)
             return "";
 
+        // If the number is 0, return 0 is alphabet numbering system 
         if (number == 0)
             return "a";
 
         String output = "";
         number++;
+        // For each digit
         while (number > 0) {
             int currentDigit = number % 26 - 1;
             number /= 26;
-
+            // Append it to result
             output = (char)(currentDigit + 'a') + output;
         }
+        // Return final result (the additional math is done because I made the output more readable)
         return output;
     }
     //#endregion
