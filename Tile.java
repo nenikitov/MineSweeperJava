@@ -1,8 +1,11 @@
 public class Tile {
+    //#region Fields
     private TileStates state;
     private boolean mined;
     private int minesNear;
+    //#endregion
 
+    //#region Constructors (and initialization)
     /**
      * Initialize a dummy tile object
      */
@@ -18,7 +21,9 @@ public class Tile {
         this.mined = mined;
         this.minesNear = minesNear;
     }
+    //#endregion
 
+    //#region Tile interaction
     /**
      * Open the tile
      * @return The result of the interaction {@link TileInteractionResults}
@@ -81,7 +86,9 @@ public class Tile {
         else
             return TileInteractionResults.INVALID_TILE;
     }
+    //#endregion
 
+    //#region Other
     /** 
      * Convert the tile to readable format
     */
@@ -98,8 +105,11 @@ public class Tile {
 
         return output;
     }
+    //#endregion
 
+    //#region Helper methods
     private boolean isInteractable() {
         return this.state != TileStates.EXPLODED && this.state != TileStates.OPENED;
     }
+    //#endregion
 }
