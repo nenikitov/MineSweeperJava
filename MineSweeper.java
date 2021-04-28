@@ -20,10 +20,14 @@ public class MineSweeper {
             System.out.println(mineField);
 
             GameInstructionData currentInstruction = inputHandler.promptGameInstruction();
-            while (!mineField.isValidInstructionData(currentInstruction)) {
-                System.out.println("The coordinates you entered are invalid. Please renter the command :");
+            while(!mineField.isValidInstructionData(currentInstruction)) {
+                System.out.println("The coordinates you entered are invalid. Please reener: ");
                 currentInstruction = inputHandler.promptGameInstruction();
             }
+            //while (!mineField.isValidInstructionData(currentInstruction)) {
+            //    System.out.println("The coordinates you entered are invalid. Please renter the command :");
+            //    currentInstruction = inputHandler.promptGameInstruction();
+            //}
         }
     }
 }
