@@ -152,6 +152,51 @@ public class MineField {
 
         return output;
     }
+    public boolean isValidInstructionData(GameInstructionData instruction) {
+        switch (instruction.getType()) {
+            case TILE_MARK_CLEAR: case TILE_MARK_FLAG: case TILE_MARK_QUESTION: case TILE_OPEN:
+                //#region Initialize and parse values
+                // Both arguments as numbers
+                int numberArgument0 = InputHandler.parseFromNumber(instruction.getArguments()[0]);
+                int numberArgument1 = InputHandler.parseFromNumber(instruction.getArguments()[1]);
+
+                // Both arguments as alphabet numbers
+                int aplhabetArgument0 = InputHandler.parseFromAlphabetNumber(instruction.getArguments()[0]);
+                int alphabetArgument1 = InputHandler.parseFromAlphabetNumber(instruction.getArguments()[1]);
+                ////#endregion
+
+                //#region Check if there is a valid configuration (one of the coordinates should be represented as a number, the other as alphabet)
+                // Verify the validity of 2 configuraions (coordinates "3 a" and "a 3" should be both valid)
+                boolean validAlphabet0Number1 = aplhabetArgument0 != -1 && numberArgument1 != -1;
+                boolean validNumber0Alphabet1 = numberArgument0 != -1 && alphabetArgument1 != -1;
+                if (!(validAlphabet0Number1 || validNumber0Alphabet1))
+                    return false;
+                //#endregion
+
+                //#region Determine which coordinate is X and which is Y
+                int x;
+                int y;
+                if (validAlphabet0Number1) {
+                    x = aplhabetArgument0;
+                    y = numberArgument1;
+                }
+                else {
+                    x = alphabetArgument1;
+                    y = numberArgument0;
+                }
+                //#endregion
+
+                //#region Verify if X and Y coordinates are valid
+                if (!isValidCoord(x, y - 1))
+                    return false;
+                //#endregion
+                
+                // If the execution goes here, the coordinates are valid, so is the instruction
+                return true;
+            default:
+                return true;
+        }
+    }
     //#endregion
     
     //#region Helper methods
