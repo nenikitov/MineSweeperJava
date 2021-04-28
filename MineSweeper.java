@@ -27,13 +27,34 @@ public class MineSweeper {
             
             switch (instruction.getType()) {
                 case GAME_HELP: {
+                    System.out.println("===== HELP PAGE =====");
+                    System.out.println("=== How to play ===");
+                    System.out.println("\tWhat you were seeing is the grid of the mine field.");
+                    System.out.println("\tThe point of the game is to open all the tiles that do not coontain mines, while avoiding mine tiles.");
+                    System.out.println("\t* Opening a mine tile will decrement the number of your lives. This can result into game over!");
+                    System.out.println("\t* Opeining an empty tile reveals the number of mines in adjacent tiles.");
+                    System.out.println("=== Controls ===");
+                    System.out.println("\tHow to call?      | Arguments?          | What does it do?");
+                    System.out.println("\t------------------+---------------------+-----------------");
+                    for (GameCommands command : GameCommands.values())
+                        System.out.println("\t" + command.getDocumentation());
+
+                    System.out.println();
+                    inputHandler.promptEnter();
                     break;
                 }
                 case GAME_INSTANT_RETRY: {
                     break;
                 }
                 case GAME_QUIT: {
-                    inputHandler.promptBoolean();
+                    // Get the confirmation
+                    System.out.println("You want to quit the game.");
+                    boolean result = inputHandler.promptBoolean();
+                    
+                    // Quit if the confirmation was recieved
+                    if (result)
+                        return;
+                    
                     break;
                 }
                 case GAME_RESTART: {
