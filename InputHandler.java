@@ -19,10 +19,43 @@ public class InputHandler {
 
     //#region Getting the input from the user
     /**
+     * Prompt user to press enter key
+     */
+    public void promptEnter() {
+        // Initial message
+        System.out.println("Please press ENTER to continue: ");
+        scanner.nextLine();
+    }
+    /**
+     * Prompt user a boolean value
+     * @return A valid boolean that user entered
+     */
+    public boolean promptBoolean() {
+        // Initial message
+        System.out.println("Are you sure? ");
+
+        while (true) {
+            String input = scanner.nextLine().toLowerCase();
+
+            //#region User entered true
+            if (input.equals("yes") || input.equals("y"))
+                return true;
+            //#endregion
+
+            //#region User entered false
+            if (input.equals("no") || input.equals("n"))
+                return false;
+            //#endregion
+
+            // If the execution goes here, the input was invalid
+            System.out.println("You wrote an invalid answer. Please retry :");
+        }
+    }
+    /**
      * Prompt user the number
      * @param min Mininum number that the user can enter (inclusive)
      * @param max Maximum number that the user can enter (exclusive)
-     * @return A valid number that the user enters
+     * @return A valid number that the user entered
      */
     public int promptNumber(int min, int max) {
         // Initial message
@@ -52,10 +85,9 @@ public class InputHandler {
             return number;
         }
     }
-
     /**
      * Prompt user the game command
-     * @return The game instruction data {@link GameInstructionData}. WARNING: provides little data validation of arguments 
+     * @return A valid game instruction data {@link GameInstructionData} that the user entered. WARNING: provides little data validation of arguments 
      */
     public GameInstructionData promptGameInstruction() {
         // Initial message
