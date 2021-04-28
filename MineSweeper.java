@@ -19,15 +19,42 @@ public class MineSweeper {
             System.out.println("============");
             System.out.println(mineField);
 
-            GameInstructionData currentInstruction = inputHandler.promptGameInstruction();
-            while (!mineField.isValidInstructionData(currentInstruction)) {
+            GameInstructionData instruction = inputHandler.promptGameInstruction();
+            while (!mineField.isValidInstructionData(instruction)) {
                 System.out.println("The coordinates you entered are invalid. Please reener: ");
-                currentInstruction = inputHandler.promptGameInstruction();
+                instruction = inputHandler.promptGameInstruction();
             }
-            //while (!mineField.isValidInstructionData(currentInstruction)) {
-            //    System.out.println("The coordinates you entered are invalid. Please renter the command :");
-            //    currentInstruction = inputHandler.promptGameInstruction();
-            //}
+            
+            int x = 0;
+            int y = 0;
+
+            if (instruction.getArguments().length >= 2) {
+                x = InputHandler.parseFromNumber(instruction.getArguments()[0]);
+                y = InputHandler.parseFromNumber(instruction.getArguments()[1]);
+            }
+
+            switch (instruction.getType()) {
+                case GAME_HELP:
+                    break;
+                case GAME_INSTANT_RETRY:
+                    break;
+                case GAME_QUIT:
+                    break;
+                case GAME_RESTART:
+                    break;
+                case TILE_MARK_CLEAR:
+                    mineField.markClearAt(x, y);
+                    break;
+                case TILE_MARK_FLAG:
+                    mineField.markFlagAt(x, y);
+                    break;
+                case TILE_MARK_QUESTION:
+                    mineField.markQuestionAt(x, y);
+                    break;
+                case TILE_OPEN:
+                    mineField.openAt(x, y);
+                    break;
+            }
         }
     }
 }
