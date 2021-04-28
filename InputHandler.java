@@ -55,8 +55,10 @@ public class InputHandler {
             }
 
             // If the execution goes here, the input is valid
-            // TODO pass the attributes
-            return new PlayerAction(commandAction, new String[0]);
+            String[] arguments = new String[command.length - 1];
+            for (int i = 0; i < arguments.length; i++)
+                arguments[i] = command[i+1];
+            return new PlayerAction(commandAction, arguments);
         }
     }
     private boolean isPlayerActions(String input) {

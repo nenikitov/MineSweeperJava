@@ -12,6 +12,9 @@ public class MineSweeper {
     public static void main(String[] args) {
         InputHandler inputHandler = new InputHandler();
 
-        inputHandler.promptPlayerAction();
+        PlayerAction action = inputHandler.promptPlayerAction();
+		System.out.println(action.getType());
+		for (int i = 0; i < action.getArguments().length; i++)
+			System.out.println(action.getArguments()[i]);
     }
 }
