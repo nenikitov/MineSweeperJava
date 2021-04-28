@@ -108,6 +108,35 @@ public class InputHandler {
     }
     //#endregion
 
+    //#region Info parsing methods
+    public static int parseNumber(String text) {
+        if (!isNumber(text))
+            return -1;
+
+        int result = 0;
+        int powers = text.length() - 1;
+
+        for (int i = 0; i < text.length(); i++) {
+            int currentNumber = text.charAt(i) - '0';
+            result += Math.pow(10, powers - i) * currentNumber;
+        }
+        return result;
+    }
+    public static int parseAlphabetNumber(String text) {
+        if (!isAlphabetNumber(text))
+            return -1;
+
+        int result = 0;
+        int powers = text.length() - 1;
+
+        for (int i = 0; i < text.length(); i++) {
+            int currentNumber = text.charAt(i) - 'a' + 1;
+            result += Math.pow(26, powers - i) * currentNumber;
+        }
+        return result - 1;
+    }
+    //#endregion
+
     //#region Helper methods
     private boolean isGameCommand(String input) {
         for (GameCommands action : GameCommands.values()) {
@@ -126,6 +155,26 @@ public class InputHandler {
             }
         }
         return GameCommands.GAME_HELP;
+    }
+    private static boolean isNumber(String text) {
+        if (text.length() == 0)
+            return false;
+
+        for (int i = 0; i < text.length(); i++) {
+            if (text.charAt(i) < '0' || text.charAt(i) > '9')
+                return false;
+        }
+        return true;
+    }
+    private static boolean isAlphabetNumber(String text) {
+        if (text.length() == 0)
+            return false;
+    
+        for (int i = 0; i < text.length(); i++) {
+            if (text.charAt(i) < 'a' || text.charAt(i) > 'z')
+                return false;
+        }
+        return true;
     }
     //#endregion
 }
