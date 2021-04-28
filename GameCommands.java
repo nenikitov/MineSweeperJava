@@ -1,4 +1,4 @@
-public enum PlayerActions {
+public enum GameCommands {
     TILE_OPEN          (new String[] { "open",     "o"  }, 2),
     TILE_MARK_FLAG     (new String[] { "flag",     "f"  }, 2),
     TILE_MARK_QUESTION (new String[] { "question", "q"  }, 2),
@@ -9,11 +9,11 @@ public enum PlayerActions {
     GAME_QUIT          (new String[] { "quit",     "q!" }, 0);
 
     private final String[] aliases;
-    private final int attributes;
+    private final int arguments;
 
-    private PlayerActions(String[] aliases, int attributes) {
+    private GameCommands(String[] aliases, int arguments) {
         this.aliases = aliases;
-        this.attributes = attributes;
+        this.arguments = arguments;
     }
 
     /**
@@ -27,7 +27,7 @@ public enum PlayerActions {
      * Get the number of arguments that the command needs to execute correctly
      * @return Number of arguments
      */
-    public int getAttributeNumber() {
-        return this.attributes;
+    public int getNumberOfArguments() {
+        return this.arguments;
     }
 }

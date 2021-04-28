@@ -1,22 +1,22 @@
 public class PlayerAction {
-    private PlayerActions type;
+    private GameCommands type;
     private String[] arguments;
 
     /**
      * Initialize Player action
-     * @param type The type of the player action {@link PlayerActions}
+     * @param type The type of the player action {@link GameCommands}
      * @param arguments The arguments that are passed with the action
      */
-    public PlayerAction(PlayerActions type, String[] arguments) {
+    public PlayerAction(GameCommands type, String[] arguments) {
         this.type = type;
         this.arguments = arguments;
     }
 
     /**
      * Get the type of the current action
-     * @return The type {@link PlayerActions}
+     * @return The type {@link GameCommands}
      */
-    public PlayerActions getType() {
+    public GameCommands getType() {
         return this.type;
     }
 

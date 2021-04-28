@@ -42,15 +42,15 @@ public class InputHandler {
             }
 
             // Check if command exists in the list of commands
-            if (!isPlayerActions(command[0])) {
+            if (!isGameCommand(command[0])) {
                 System.out.println("\"" + command[0] + "\" is unknown command. Write \"help\" to get the documentation how to play the game. Please reenter :" );
                 continue;
             }
 
-            PlayerActions commandAction = findPlayerActions(command[0]);
+            GameCommands commandAction = findGameCommand(command[0]);
             // Check if the number of attribute is right
-            if (command.length - 1 != commandAction.getAttributeNumber()) {
-                System.out.println("The command \"" + command[0] + "\" needs " + commandAction.getAttributeNumber() + " attributes. You entered " + (command.length - 1) + ". Please reenter :");
+            if (command.length - 1 != commandAction.getNumberOfArguments()) {
+                System.out.println("The command \"" + command[0] + "\" needs " + commandAction.getNumberOfArguments() + " attributes. You entered " + (command.length - 1) + ". Please reenter :");
                 continue;
             }
 
@@ -61,8 +61,8 @@ public class InputHandler {
             return new PlayerAction(commandAction, arguments);
         }
     }
-    private boolean isPlayerActions(String input) {
-        for (PlayerActions action : PlayerActions.values()) {
+    private boolean isGameCommand(String input) {
+        for (GameCommands action : GameCommands.values()) {
             for (String alias : action.getAliases()) {
                 if (alias.equals(input))
                     return true;
@@ -70,13 +70,13 @@ public class InputHandler {
         }
         return false;
     }
-    private PlayerActions findPlayerActions(String input) {
-        for (PlayerActions action : PlayerActions.values()) {
+    private GameCommands findGameCommand(String input) {
+        for (GameCommands action : GameCommands.values()) {
             for (String alias : action.getAliases()) {
                 if (alias.equals(input))
                     return action;
             }
         }
-        return PlayerActions.GAME_HELP;
+        return GameCommands.GAME_HELP;
     }
 }
