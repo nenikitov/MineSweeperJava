@@ -1,15 +1,20 @@
 import java.util.Scanner;
 
 public class InputHandler {
+    //#region Fields
     private Scanner scanner;
+    //#endregion
 
+    //#region Constructor
     /**
      * Initialize Input Handler
      */
     InputHandler() {
         scanner = new Scanner(System.in);
     }
+    //#endregion
 
+    //#region Getting the input from the user
     /**
      * Prompt user the number
      * @param min Mininum number that the user can enter (inclusive)
@@ -22,20 +27,22 @@ public class InputHandler {
 
         // Loop until the function returns
         while (true) {
-            // Check if entered value is a number
+            //#region Check if entered value is a number
             if (!scanner.hasNextInt()) {
                 // Write an error message and go to next iteration (reask)
                 System.out.println("\"" + scanner.next() + "\" is invalid. Entered value is not a number. Please reenter :");
                 continue;
             }
+            //#endregion
 
+            //#region Check if the entered number is in bounds
             int number = scanner.nextInt();
-            // Check if the entered number is in bounds
             if (number < min || number >= max) {
                 // Write an error message and go to next iteration (reask)
                 System.out.println("\"" + number + "\" is invalid. Entered number is outside the range from " + min + " to " + (max - 1) + ". Please reenter :");
                 continue;
             }
+            //#endregion
 
             // If the execution goes here, the number is valid
             // Return it
@@ -56,37 +63,44 @@ public class InputHandler {
             String[] command = scanner.nextLine().split(" ");
             
             // The empty input from the console always has at least "new line" character, so I can safely access the 0th index of the array
-            // Check if line is empty (.trim() removes whitespaces)
+            //#region Check if line is empty (.trim() removes whitespaces)
             if (command[0].trim().length() == 0) {
                 // Write an error message and go to next iteration (reask)
                 System.out.println("You have entered an empty line. Please reenter :");
                 continue;
             }
+            //#endregion
 
-            // Check if command exists in the list of commands
+            //#region Check if command exists in the list of commands
             if (!isGameCommand(command[0])) {
                 // Write an error message and go to next iteration (reask)
                 System.out.println("\"" + command[0] + "\" is unknown command. Write \"help\" to get the documentation how to play the game. Please reenter :" );
                 continue;
             }
+            //#endregion
 
+            //#region Check if the number of attributes is right
             GameCommands commandAction = findGameCommand(command[0]);
-            // Check if the number of attribute is right
             if (command.length - 1 != commandAction.getNumberOfArguments()) {
                 // Write an error message and go to next iteration (reask)
                 System.out.println("The command \"" + command[0] + "\" needs " + commandAction.getNumberOfArguments() + " attributes. You entered " + (command.length - 1) + ". Please reenter :");
                 continue;
             }
+            //#endregion
 
             // If the execution goes here, the input is valid
-            // Generate an array of arguments (the array of the command without the first part)
+            //#region Generate an array of arguments (the array of the command without the first part)
             String[] arguments = new String[command.length - 1];
             for (int i = 0; i < arguments.length; i++)
-                arguments[i] = command[i+1];
+                arguments[i] = command[i + 1];
+            //#endregion
             // Return everything
             return new GameInstructionData(commandAction, arguments);
         }
     }
+    //#endregion
+
+    //#region Helper methods
     private boolean isGameCommand(String input) {
         for (GameCommands action : GameCommands.values()) {
             for (String alias : action.getAliases()) {
@@ -105,4 +119,5 @@ public class InputHandler {
         }
         return GameCommands.GAME_HELP;
     }
+    //#endregion
 }
