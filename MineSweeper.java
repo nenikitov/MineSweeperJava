@@ -34,8 +34,8 @@ public class MineSweeper {
                     System.out.println("\t* Opening a mine tile will decrement the number of your lives. This can result into game over!");
                     System.out.println("\t* Opeining an empty tile reveals the number of mines in adjacent tiles.");
                     System.out.println("=== Controls ===");
-                    System.out.println("\tHow to call?      | Arguments?          | What does it do?");
-                    System.out.println("\t------------------+---------------------+-----------------");
+                    System.out.println("\tHow to call?        | Arguments?        | What does it do?");
+                    System.out.println("\t--------------------+-------------------+-----------------");
                     for (GameCommands command : GameCommands.values())
                         System.out.println("\t" + command.getDocumentation());
 

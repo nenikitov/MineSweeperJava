@@ -47,8 +47,10 @@ public enum GameCommands {
      * @return Detatiled documentation
      */
     public String getDocumentation() {
+        // Start with empty documentation
         String output = "";
 
+        // Append aliases
         for (int i = 0; i < this.aliases.length; i++) {
             output += this.aliases[i];
 
@@ -56,18 +58,23 @@ public enum GameCommands {
                 output += ", ";
         }
 
-        for (int i = output.length(); i < 18; i++)
+        // Make everything aligned to the table in documentation
+        for (int i = output.length(); i < 20; i++)
             output += " ";
         output += "| ";
 
+        // Append number of arguments
         output += this.arguments;
 
+        // Make everything aligned to the table in documentation
         for (int i = output.length(); i < 40; i++)
             output += " ";
         output += "| ";
 
+        // Append documentation
         output += this.documentation;
 
+        // Output finalized documentation
         return output;
     }
     //#endregion
