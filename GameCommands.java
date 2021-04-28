@@ -17,7 +17,7 @@ public enum GameCommands {
     }
 
     /**
-     * Get the aliases of the command (strings that can be used to call the player action)
+     * Get the aliases of the command (strings that can be used to call the game commands)
      * @return Aliases 
      */
     public String[] getAliases() {

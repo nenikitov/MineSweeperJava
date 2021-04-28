@@ -1,4 +1,4 @@
-public class PlayerAction {
+public class GameInstructionData {
     private GameCommands type;
     private String[] arguments;
 
@@ -7,7 +7,7 @@ public class PlayerAction {
      * @param type The type of the player action {@link GameCommands}
      * @param arguments The arguments that are passed with the action
      */
-    public PlayerAction(GameCommands type, String[] arguments) {
+    public GameInstructionData(GameCommands type, String[] arguments) {
         this.type = type;
         this.arguments = arguments;
     }
