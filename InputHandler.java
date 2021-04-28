@@ -109,31 +109,48 @@ public class InputHandler {
     //#endregion
 
     //#region Info parsing methods
-    public static int parseNumber(String text) {
+    public static int parseFromNumber(String text) {
         if (!isNumber(text))
             return -1;
 
-        int result = 0;
+        int output = 0;
         int powers = text.length() - 1;
 
         for (int i = 0; i < text.length(); i++) {
             int currentNumber = text.charAt(i) - '0';
-            result += Math.pow(10, powers - i) * currentNumber;
+            output += Math.pow(10, powers - i) * currentNumber;
         }
-        return result;
+        return output;
     }
-    public static int parseAlphabetNumber(String text) {
+    public static int parseFromAlphabetNumber(String text) {
         if (!isAlphabetNumber(text))
             return -1;
 
-        int result = 0;
+        int ouptut = 0;
         int powers = text.length() - 1;
 
         for (int i = 0; i < text.length(); i++) {
             int currentNumber = text.charAt(i) - 'a' + 1;
-            result += Math.pow(26, powers - i) * currentNumber;
+            ouptut += Math.pow(26, powers - i) * currentNumber;
         }
-        return result - 1;
+        return ouptut - 1;
+    }
+    public static String parseToAlphabetNumber(int number) {
+        if (number < 0)
+            return "";
+
+        if (number == 0)
+            return "a";
+
+        String output = "";
+        number++;
+        while (number > 0) {
+            int currentDigit = number % 26 - 1;
+            number /= 26;
+
+            output = (char)(currentDigit + 'a') + output;
+        }
+        return output;
     }
     //#endregion
 
