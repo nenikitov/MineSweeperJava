@@ -57,7 +57,7 @@ public class InputHandler {
      * Prompt user the game command
      * @return The game instruction data {@link GameInstructionData}. WARNING: provides little data validation of arguments 
      */
-    public GameInstructionData promptPlayerAction() {
+    public GameInstructionData promptGameInstruction() {
         // Initial message
         System.out.println("Please enter the command :");
         
@@ -72,6 +72,11 @@ public class InputHandler {
                 System.out.println("You have entered an empty line. Please reenter :");
                 continue;
             }
+            //#endregion
+
+            //#region Make everything lowercase (for simplicity)
+            for (int i = 0; i < command.length; i++)
+                command[i] = command[i].toLowerCase();
             //#endregion
 
             //#region Check if command exists in the list of commands

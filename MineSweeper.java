@@ -10,11 +10,13 @@ public class MineSweeper {
 	*/
 	
     public static void main(String[] args) {
-        InputHandler inputHandler = new InputHandler();
+		Player player = new Player(1);
+		MineField mineField = new MineField(15, 7, 0.15);
+		InputHandler inputHandler = new InputHandler();
 
-        GameInstructionData action = inputHandler.promptPlayerAction();
-		System.out.println(action.getType());
-		for (int i = 0; i < action.getArguments().length; i++)
-			System.out.println(action.getArguments()[i]);
+		while (true) {
+			System.out.println(mineField);
+			GameInstructionData currentInstruction = inputHandler.promptGameInstruction();
+		}
     }
 }
