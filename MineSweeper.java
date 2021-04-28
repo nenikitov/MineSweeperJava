@@ -5,12 +5,13 @@ public class MineSweeper {
 	 * Execute action method for the mineField
 	 * Enum attributes https://www.baeldung.com/java-enum-values for player actions
 	 * Switch expressions with -> https://docs.oracle.com/en/java/javase/13/language/switch-expressions.html
+     * Finish input handler prompting actions
+     * Fix the naming of PlayerAcions (rename the enum to be smth like GameCommands and attributes to arguments)
 	*/
 	
     public static void main(String[] args) {
         InputHandler inputHandler = new InputHandler();
 
-        int option = inputHandler.promptNumber(1, 5);
-        System.out.println(option);
+        inputHandler.promptPlayerAction();
     }
 }
