@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/**
+ * The class that is used to prompt the user the commands
+ */
 public class InputHandler {
     //#region Fields
     private Scanner scanner;

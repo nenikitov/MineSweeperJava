@@ -1,5 +1,8 @@
 import java.util.Random;
 
+/**
+ * The class that generates and stores the state of the gameplay mine field. Is used to interact with tiles
+ */
 public class MineField {
     //#region Fields
     private int width;

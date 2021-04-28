@@ -1,3 +1,6 @@
+/**
+ * The class that stores the state of the player. Is used to calculate the lives that the player has
+ */
 public class Player {
     //#region Fields
     private int lives;

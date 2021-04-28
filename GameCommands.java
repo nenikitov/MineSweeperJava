@@ -1,3 +1,6 @@
+/**
+ * The list of all the commands that the user can use during the gameplay
+ */
 public enum GameCommands {
     //#region Enum entries
     TILE_OPEN          (new String[] { "open",     "o"  }, 2),

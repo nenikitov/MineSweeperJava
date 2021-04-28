@@ -1,3 +1,6 @@
+/**
+ * The class that stores the data of the gameplay command. It is used to transmit data
+ */
 public class GameInstructionData {
     //#region Fields
     private GameCommands type;

@@ -1,3 +1,6 @@
+/**
+ * The class that represents the tile in the mine field
+ */
 public class Tile {
     //#region Fields
     private TileStates state;

@@ -1,3 +1,6 @@
+/**
+ * The list of all the tile state
+ */
 public enum TileStates {
     //#region enum entries
     CLOSED           ('■'),
