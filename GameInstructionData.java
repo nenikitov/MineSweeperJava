@@ -4,7 +4,7 @@ public class GameInstructionData {
     private String[] arguments;
     //#endregion
 
-    //#region Constructor
+    //#region Constructors
     /**
      * Initialize Player action
      * @param type The type of the player action {@link GameCommands}

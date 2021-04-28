@@ -1,12 +1,15 @@
 import java.util.Random;
 
 public class MineField {
+    //#region Fields
     private int width;
     private int height;
     private double difficulty;
     private Tile[][] tiles;
     private boolean isPopulated;
+    //#endregion
 
+    //#region Constructors
     /**
      * Initialize the mine field object
      * @param widt The width of a playing field
@@ -23,7 +26,9 @@ public class MineField {
             for (int x = 0; x < width; x++)
                 this.tiles[y][x] = new Tile();
     }
+    //#endregion
 
+    //#region Mine placement
     private void populateField(int excludeX, int excludeY) {
         // Generate the array of all possible indexes where the mine can be places (except the exclude coodinate - first move)
         int excludeIndex = coordsToIndex(excludeX, excludeY);
@@ -63,7 +68,9 @@ public class MineField {
         
         this.isPopulated = true;
     }
+    //#endregion
 
+    //#region Tile interaction
     /**
      * Open the tile at specific coordinates
      * @param x X coordinate
@@ -124,7 +131,9 @@ public class MineField {
         // Clear the marks from the tile
         return tiles[y][x].markClear();
     }
+    //#endregion
 
+    //#region Other
     /** 
      * Convert the mine field to readable format
     */
@@ -140,7 +149,9 @@ public class MineField {
 
         return output;
     }
+    //#endregion
     
+    //#region Helper methods
     private boolean isValidCoord(int x, int y) {
         return (x >= 0 && x < width) && (y >= 0 && y < height);
     }
@@ -167,4 +178,5 @@ public class MineField {
     private int coordsToIndex(int x, int y) {
         return y * width + x;
     }    
+    //#endregion
 }

@@ -15,7 +15,7 @@ public enum GameCommands {
     private final int arguments;
     //#endregion
 
-    //#region Constructor
+    //#region Constructors
     private GameCommands(String[] aliases, int arguments) {
         this.aliases = aliases;
         this.arguments = arguments;

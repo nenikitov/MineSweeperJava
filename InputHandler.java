@@ -5,7 +5,7 @@ public class InputHandler {
     private Scanner scanner;
     //#endregion
 
-    //#region Constructor
+    //#region Constructors
     /**
      * Initialize Input Handler
      */
