@@ -12,17 +12,16 @@ public class MineSweeper {
     public static void main(String[] args) {
         Player player = new Player(1);
         MineField mineField = new MineField(15, 7, 0.15);
-        InputHandler inputHandler = new InputHandler();
 
         // Game loop
         while (true) {
             System.out.println("============");
             System.out.println(mineField);
 
-            GameInstructionData instruction = inputHandler.promptGameInstruction();
+            GameInstructionData instruction = InputHandler.promptGameInstruction();
             while (!mineField.isValidInstructionData(instruction)) {
                 System.out.println("The coordinates you entered are invalid. Please reener: ");
-                instruction = inputHandler.promptGameInstruction();
+                instruction = InputHandler.promptGameInstruction();
             }
             
             switch (instruction.getType()) {
@@ -40,7 +39,7 @@ public class MineSweeper {
                         System.out.println("\t" + command.getDocumentation());
 
                     System.out.println();
-                    inputHandler.promptEnter();
+                    InputHandler.promptEnter();
                     break;
                 }
                 case GAME_INSTANT_RETRY: {
@@ -49,7 +48,7 @@ public class MineSweeper {
                 case GAME_QUIT: {
                     // Get the confirmation
                     System.out.println("You want to quit the game.");
-                    boolean result = inputHandler.promptBoolean();
+                    boolean result = InputHandler.promptBoolean();
                     
                     // Quit if the confirmation was recieved
                     if (result)
