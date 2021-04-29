@@ -118,6 +118,11 @@ public class GameInstructionData {
     //#endregion
 
     //#region Other
+    /**
+     * Finds the command that can be called by an input
+     * @param text Input used to call the command
+     * @return The command
+     */
     public static GameCommands findGameCommand(String text) {
         for (GameCommands action : GameCommands.values()) {
             for (String alias : action.getAliases()) {
