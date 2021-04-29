@@ -15,7 +15,7 @@ public class InputHandler {
      */
     public static void promptEnter() {
         // Initial message
-        System.out.println("Please press ENTER to continue: ");
+        System.out.println("Please press ENTER to continue:");
         scanner.nextLine();
     }
     /**
@@ -24,7 +24,7 @@ public class InputHandler {
      */
     public static boolean promptBoolean() {
         // Initial message
-        System.out.println("Are you sure? ");
+        System.out.println("Are you sure?");
 
         while (true) {
             String input = scanner.nextLine().toLowerCase();
@@ -150,7 +150,7 @@ public class InputHandler {
     public static int parseFromAlphabetNumber(String text) {
         // If the string is empty, do not even bother checking
         if (text.length() == 0)
-            throw new IllegalArgumentException("Invalid input for " + text);
+            throw new NumberFormatException("Invalid input for " + text);
 
         int ouptut = 0;
         int powers = text.length() - 1;
@@ -158,7 +158,7 @@ public class InputHandler {
         for (int i = 0; i < text.length(); i++) {
             // If the character is invalid, stop parsing
             if (text.charAt(i) < 'a' || text.charAt(i) > 'z')
-                throw new IllegalArgumentException("Invalid input for " + text);
+                throw new NumberFormatException("Invalid input for " + text);
 
             int currentNumber = text.charAt(i) - 'a' + 1;
             // Add it to result (paying attention to the power)
@@ -192,19 +192,6 @@ public class InputHandler {
         }
         // Return final result (the additional math is done because I made the output more readable)
         return output;
-    }
-    //#endregion
-
-    //#region Helper methods
-    private static boolean isAlphabetNumber(String text) {
-        if (text.length() == 0)
-            return false;
-    
-        for (int i = 0; i < text.length(); i++) {
-            if (text.charAt(i) < 'a' || text.charAt(i) > 'z')
-                return false;
-        }
-        return true;
     }
     //#endregion
 }

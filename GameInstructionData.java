@@ -79,8 +79,21 @@ public class GameInstructionData {
         }
         //#endregion
         //#region Both arguments as alphabet numbers
-        int alphabetArgument0 = InputHandler.parseFromAlphabetNumber(this.arguments[0]);
-        int alphabetArgument1 = InputHandler.parseFromAlphabetNumber(this.arguments[1]);
+        int alphabetArgument0;
+        int alphabetArgument1;
+
+        try {
+            alphabetArgument0 = InputHandler.parseFromAlphabetNumber(this.arguments[0]);
+        }
+        catch (NumberFormatException e) {
+            alphabetArgument0 = -1;
+        }
+        try {
+            alphabetArgument1 = InputHandler.parseFromAlphabetNumber(this.arguments[1]);
+        }
+        catch (NumberFormatException e) {
+            alphabetArgument1 = -1;
+        }
         //#endregion
         //#endregion
 
