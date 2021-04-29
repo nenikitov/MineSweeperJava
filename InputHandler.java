@@ -173,9 +173,9 @@ public class InputHandler {
      * @return String representation of the number in alphabetic form (a - 0, z - 25, aa - 26)
      */
     public static String parseToAlphabetNumber(int number) {
-        if (number < 0)
         // If the number is invalid - return error (empty)
-            return "";
+        if (number < 0)
+            throw new NumberFormatException("Invalid input for " + number);
 
         // If the number is 0, return 0 is alphabet numbering system 
         if (number == 0)
