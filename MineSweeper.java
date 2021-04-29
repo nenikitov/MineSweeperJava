@@ -19,10 +19,6 @@ public class MineSweeper {
             System.out.println(mineField);
 
             GameInstructionData instruction = InputHandler.promptGameInstruction();
-            while (!mineField.isValidInstructionData(instruction)) {
-                System.out.println("The coordinates you entered are invalid. Please reener: ");
-                instruction = InputHandler.promptGameInstruction();
-            }
             
             switch (instruction.getType()) {
                 case GAME_HELP: {
@@ -64,13 +60,21 @@ public class MineSweeper {
                     int x = Integer.parseInt(instruction.getArguments()[0]);
                     int y = Integer.parseInt(instruction.getArguments()[1]);
                     // Execute and get the result
-                    TileInteractionResults interactionResult = mineField.markClearAt(x, y);
-                    //#region Print the confirmation message
-                    if (interactionResult == TileInteractionResults.INVALID_TILE)
-                        System.out.println("You cannot clear the marks of this tile, it is not interactable. This turn is skipped...");
-                    else if (interactionResult == TileInteractionResults.SUCCESS)
-                        System.out.println("Sucessfully cleared all the marks from this tile...");
-                    //#endregion
+                    try {
+                        TileInteractionResults interactionResult = mineField.markClearAt(x, y);
+                        //#region Print the confirmation message
+                        if (interactionResult == TileInteractionResults.INVALID_TILE) {
+                            System.out.println("You cannot clear the marks of this tile, it is not interactable.");
+                            System.out.println("This turn is skipped...");
+                        }
+                        else if (interactionResult == TileInteractionResults.SUCCESS)
+                            System.out.println("Sucessfully cleared the marks from this tile.");
+                        //#endregion
+                    }
+                    catch (IndexOutOfBoundsException e) {
+                        System.out.println(e.getMessage());
+                        System.out.println("This turn is skipped...");
+                    }
                     break;
                 }
                 case TILE_MARK_FLAG: {
@@ -78,13 +82,21 @@ public class MineSweeper {
                     int x = Integer.parseInt(instruction.getArguments()[0]);
                     int y = Integer.parseInt(instruction.getArguments()[1]);
                     // Execute and get the result
-                    TileInteractionResults interactionResult = mineField.markFlagAt(x, y);
-                    //#region Print the confirmation message
-                    if (interactionResult == TileInteractionResults.INVALID_TILE)
-                        System.out.println("You cannot mark this tile with a flag, it is not interactable. This turn is skipped...");
-                    else if (interactionResult == TileInteractionResults.SUCCESS)
-                        System.out.println("Sucessfully marked this tile with a flag...");
-                    //#endregion
+                    try {
+                        TileInteractionResults interactionResult = mineField.markFlagAt(x, y);
+                        //#region Print the confirmation message
+                        if (interactionResult == TileInteractionResults.INVALID_TILE) {
+                            System.out.println("You cannot mark this tile with a flag, it is not interactable.");
+                            System.out.println("This turn is skipped...");
+                        }
+                        else if (interactionResult == TileInteractionResults.SUCCESS)
+                            System.out.println("Sucessfully marked this tile with a flag.");
+                        //#endregion
+                    }
+                    catch (IndexOutOfBoundsException e) {
+                        System.out.println(e.getMessage());
+                        System.out.println("This turn is skipped...");
+                    }
                     break;
                 }
                 case TILE_MARK_QUESTION: {
@@ -92,13 +104,21 @@ public class MineSweeper {
                     int x = Integer.parseInt(instruction.getArguments()[0]);
                     int y = Integer.parseInt(instruction.getArguments()[1]);
                     // Execute and get the result
-                    TileInteractionResults interactionResult = mineField.markQuestionAt(x, y);
-                    //#region Print the confirmation message
-                    if (interactionResult == TileInteractionResults.INVALID_TILE)
-                        System.out.println("You cannot mark this tile with a question, it is not interactable. This turn is skipped...");
-                    else if (interactionResult == TileInteractionResults.SUCCESS)
-                        System.out.println("Sucessfully marked this tile with a question...");
-                    //#endregion
+                    try {
+                        TileInteractionResults interactionResult = mineField.markQuestionAt(x, y);
+                        //#region Print the confirmation message
+                        if (interactionResult == TileInteractionResults.INVALID_TILE) {
+                            System.out.println("You cannot mark this tile with a question, it is not interactable.");
+                            System.out.println("This turn is skipped...");
+                        }
+                        else if (interactionResult == TileInteractionResults.SUCCESS)
+                            System.out.println("Sucessfully marked this tile with a question.");
+                        //#endregion
+                    }
+                    catch (IndexOutOfBoundsException e) {
+                        System.out.println(e.getMessage());
+                        System.out.println("This turn is skipped...");
+                    }
                     break;
                 }
                 case TILE_OPEN: {
@@ -106,8 +126,21 @@ public class MineSweeper {
                     int x = Integer.parseInt(instruction.getArguments()[0]);
                     int y = Integer.parseInt(instruction.getArguments()[1]);
                     // Execute and get the result
-                    TileInteractionResults interactionResult = mineField.openAt(x, y);
-                    //#region Print the confirmation message
+                    try {
+                        TileInteractionResults interactionResult = mineField.openAt(x, y);
+                        //#region Print the confirmation message
+                        if (interactionResult == TileInteractionResults.INVALID_TILE) {
+                            System.out.println("You cannot open this tile, it is not interactable.");
+                            System.out.println("This turn is skipped...");
+                        }
+                        else if (interactionResult == TileInteractionResults.SUCCESS)
+                            System.out.println("Sucessfully opened this tile.");
+                        //#endregion
+                    }
+                    catch (IndexOutOfBoundsException e) {
+                        System.out.println(e.getMessage());
+                        System.out.println("This turn is skipped...");
+                    }
                     break;
                 }
             }

@@ -81,6 +81,10 @@ public class MineField {
      * @return The result of the interaction {@link TileInteractionResults}
      */
     public TileInteractionResults openAt(int x, int y) {
+        // Check if the tile is inside the mine field
+        if (!isValidCoord(x, y))
+            throw new IndexOutOfBoundsException("The coordinates are outside the mine field.");
+
         // If it is the first move - generate mines
         if (!this.isPopulated)
             this.populateField(x, y);
@@ -95,6 +99,10 @@ public class MineField {
      * @return The result of the interaction {@link TileInteractionResults}
      */
     public TileInteractionResults markFlagAt(int x, int y) {
+        // Check if the tile is inside the mine field
+        if (!isValidCoord(x, y))
+            throw new IndexOutOfBoundsException("The coordinates are outside the mine field.");
+
         // Mark the tile with a flag
         return tiles[y][x].markFlag();
     }
@@ -105,6 +113,10 @@ public class MineField {
      * @return The result of the interaction {@link TileInteractionResults}
      */
     public TileInteractionResults markQuestionAt(int x, int y) {
+        // Check if the tile is inside the mine field
+        if (!isValidCoord(x, y))
+            throw new IndexOutOfBoundsException("The coordinates are outside the mine field.");
+
         // Mark the tile with a question
         return tiles[y][x].markQuestion();
     }
@@ -115,6 +127,10 @@ public class MineField {
      * @return The result of the interaction {@link TileInteractionResults}
      */
     public TileInteractionResults markClearAt(int x, int y) {
+        // Check if the tile is inside the mine field
+        if (!isValidCoord(x, y))
+            throw new IndexOutOfBoundsException("The coordinates are outside the mine field.");
+
         // Clear the marks from the tile
         return tiles[y][x].markClear();
     }
@@ -135,22 +151,6 @@ public class MineField {
         }
 
         return output;
-    }
-    /**
-     * Verifies if the instruction can be executed in the minefield
-     * @param instruction The data of the game instruction {@link GameInstructionData}
-     * @return If the instruction can be executed
-     */
-    public boolean isValidInstructionData(GameInstructionData instruction) {
-        switch (instruction.getType()) {
-            case TILE_MARK_CLEAR: case TILE_MARK_FLAG: case TILE_MARK_QUESTION: case TILE_OPEN:
-                int x = Integer.parseInt(instruction.getArguments()[0]);
-                int y = Integer.parseInt(instruction.getArguments()[1]);
-
-                return this.isValidCoord(x, y);
-            default:
-                return true;
-        }
     }
     //#endregion
     
