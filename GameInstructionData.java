@@ -119,7 +119,7 @@ public class GameInstructionData {
 
     //#region Other
     /**
-     * Finds the command that can be called by an input
+     * Find the command that can be called by an input
      * @param text Input used to call the command
      * @return The command
      */
