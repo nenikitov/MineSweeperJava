@@ -12,18 +12,13 @@ public class MineSweeper {
     public static void main(String[] args) {
         Player player = new Player(1);
         MineField mineField = new MineField(15, 7, 0.15);
-        InputHandler inputHandler = new InputHandler();
 
         // Game loop
         while (true) {
             System.out.println("============");
             System.out.println(mineField);
 
-            GameInstructionData instruction = inputHandler.promptGameInstruction();
-            while (!mineField.isValidInstructionData(instruction)) {
-                System.out.println("The coordinates you entered are invalid. Please reener: ");
-                instruction = inputHandler.promptGameInstruction();
-            }
+            GameInstructionData instruction = InputHandler.promptGameInstruction();
             
             switch (instruction.getType()) {
                 case GAME_HELP: {
@@ -40,7 +35,7 @@ public class MineSweeper {
                         System.out.println("\t" + command.getDocumentation());
 
                     System.out.println();
-                    inputHandler.promptEnter();
+                    InputHandler.promptEnter();
                     break;
                 }
                 case GAME_INSTANT_RETRY: {
@@ -49,7 +44,7 @@ public class MineSweeper {
                 case GAME_QUIT: {
                     // Get the confirmation
                     System.out.println("You want to quit the game.");
-                    boolean result = inputHandler.promptBoolean();
+                    boolean result = InputHandler.promptBoolean();
                     
                     // Quit if the confirmation was recieved
                     if (result)
@@ -62,53 +57,90 @@ public class MineSweeper {
                 }
                 case TILE_MARK_CLEAR: {
                     // Get coords of the input
-                    int x = InputHandler.parseFromNumber(instruction.getArguments()[0]);
-                    int y = InputHandler.parseFromNumber(instruction.getArguments()[1]);
+                    int x = Integer.parseInt(instruction.getArguments()[0]);
+                    int y = Integer.parseInt(instruction.getArguments()[1]);
                     // Execute and get the result
-                    TileInteractionResults interactionResult = mineField.markClearAt(x, y);
-                    //#region Print the confirmation message
-                    if (interactionResult == TileInteractionResults.INVALID_TILE)
-                        System.out.println("You cannot clear the marks of this tile, it is not interactable. This turn is skipped...");
-                    else if (interactionResult == TileInteractionResults.SUCCESS)
-                        System.out.println("Sucessfully cleared all the marks from this tile...");
-                    //#endregion
+                    try {
+                        TileInteractionResults interactionResult = mineField.markClearAt(x, y);
+                        //#region Print the confirmation message
+                        if (interactionResult == TileInteractionResults.INVALID_TILE) {
+                            System.out.println("You cannot clear the marks of this tile, it is not interactable.");
+                            System.out.println("This turn is skipped...");
+                        }
+                        else if (interactionResult == TileInteractionResults.SUCCESS)
+                            System.out.println("Sucessfully cleared the marks from this tile.");
+                        //#endregion
+                    }
+                    catch (IndexOutOfBoundsException e) {
+                        System.out.println(e.getMessage());
+                        System.out.println("This turn is skipped...");
+                    }
                     break;
                 }
                 case TILE_MARK_FLAG: {
                     // Get coords of the input
-                    int x = InputHandler.parseFromNumber(instruction.getArguments()[0]);
-                    int y = InputHandler.parseFromNumber(instruction.getArguments()[1]);
+                    int x = Integer.parseInt(instruction.getArguments()[0]);
+                    int y = Integer.parseInt(instruction.getArguments()[1]);
                     // Execute and get the result
-                    TileInteractionResults interactionResult = mineField.markFlagAt(x, y);
-                    //#region Print the confirmation message
-                    if (interactionResult == TileInteractionResults.INVALID_TILE)
-                        System.out.println("You cannot mark this tile with a flag, it is not interactable. This turn is skipped...");
-                    else if (interactionResult == TileInteractionResults.SUCCESS)
-                        System.out.println("Sucessfully marked this tile with a flag...");
-                    //#endregion
+                    try {
+                        TileInteractionResults interactionResult = mineField.markFlagAt(x, y);
+                        //#region Print the confirmation message
+                        if (interactionResult == TileInteractionResults.INVALID_TILE) {
+                            System.out.println("You cannot mark this tile with a flag, it is not interactable.");
+                            System.out.println("This turn is skipped...");
+                        }
+                        else if (interactionResult == TileInteractionResults.SUCCESS)
+                            System.out.println("Sucessfully marked this tile with a flag.");
+                        //#endregion
+                    }
+                    catch (IndexOutOfBoundsException e) {
+                        System.out.println(e.getMessage());
+                        System.out.println("This turn is skipped...");
+                    }
                     break;
                 }
                 case TILE_MARK_QUESTION: {
                     // Get coords of the input
-                    int x = InputHandler.parseFromNumber(instruction.getArguments()[0]);
-                    int y = InputHandler.parseFromNumber(instruction.getArguments()[1]);
+                    int x = Integer.parseInt(instruction.getArguments()[0]);
+                    int y = Integer.parseInt(instruction.getArguments()[1]);
                     // Execute and get the result
-                    TileInteractionResults interactionResult = mineField.markQuestionAt(x, y);
-                    //#region Print the confirmation message
-                    if (interactionResult == TileInteractionResults.INVALID_TILE)
-                        System.out.println("You cannot mark this tile with a question, it is not interactable. This turn is skipped...");
-                    else if (interactionResult == TileInteractionResults.SUCCESS)
-                        System.out.println("Sucessfully marked this tile with a question...");
-                    //#endregion
+                    try {
+                        TileInteractionResults interactionResult = mineField.markQuestionAt(x, y);
+                        //#region Print the confirmation message
+                        if (interactionResult == TileInteractionResults.INVALID_TILE) {
+                            System.out.println("You cannot mark this tile with a question, it is not interactable.");
+                            System.out.println("This turn is skipped...");
+                        }
+                        else if (interactionResult == TileInteractionResults.SUCCESS)
+                            System.out.println("Sucessfully marked this tile with a question.");
+                        //#endregion
+                    }
+                    catch (IndexOutOfBoundsException e) {
+                        System.out.println(e.getMessage());
+                        System.out.println("This turn is skipped...");
+                    }
                     break;
                 }
                 case TILE_OPEN: {
                     // Get coords of the input
-                    int x = InputHandler.parseFromNumber(instruction.getArguments()[0]);
-                    int y = InputHandler.parseFromNumber(instruction.getArguments()[1]);
+                    int x = Integer.parseInt(instruction.getArguments()[0]);
+                    int y = Integer.parseInt(instruction.getArguments()[1]);
                     // Execute and get the result
-                    TileInteractionResults interactionResult = mineField.openAt(x, y);
-                    //#region Print the confirmation message
+                    try {
+                        TileInteractionResults interactionResult = mineField.openAt(x, y);
+                        //#region Print the confirmation message
+                        if (interactionResult == TileInteractionResults.INVALID_TILE) {
+                            System.out.println("You cannot open this tile, it is not interactable.");
+                            System.out.println("This turn is skipped...");
+                        }
+                        else if (interactionResult == TileInteractionResults.SUCCESS)
+                            System.out.println("Sucessfully opened this tile.");
+                        //#endregion
+                    }
+                    catch (IndexOutOfBoundsException e) {
+                        System.out.println(e.getMessage());
+                        System.out.println("This turn is skipped...");
+                    }
                     break;
                 }
             }
