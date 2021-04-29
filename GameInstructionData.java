@@ -16,9 +16,9 @@ public class GameInstructionData {
     public GameInstructionData(GameCommands type, String[] arguments) {
         if (type.getNumberOfArguments() != arguments.length)
             throw new IllegalArgumentException(
-                "The number of arguments is invalid."  
-                + "The command \"" + type + "\" should have " + type.getNumberOfArguments()
-                + ", but you entered " + arguments.length + ".");
+                "The number of arguments is invalid. "
+                + "The command \"" + type.getAliases()[0] + "\" should have " + type.getNumberOfArguments() + ", "
+                + "but you entered " + arguments.length + ".");
 
         this.type = type;
         this.arguments = arguments;

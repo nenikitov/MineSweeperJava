@@ -118,12 +118,15 @@ public class InputHandler {
                     return new GameInstructionData(currentCommand, arguments);
                 }
                 catch (IllegalArgumentException e) {
+                    // There is something wrong with the arguments
+                    // Write an error message and go to next iteration
                     System.out.println(e.getMessage());
                     System.out.println("Please reenter :");
                     continue;
                 }
             }
             catch (IllegalArgumentException e) {
+                // The command does not exist
                 // Write an error message and go to next iteration
                 System.out.println(e.getMessage());
                 System.out.println("Please reenter :");
