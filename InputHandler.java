@@ -5,8 +5,8 @@ import java.util.Scanner;
  */
 public class InputHandler {
     //#region Fields
-    private static Scanner scanner = new Scanner(System.in);
-    private static String reenterMessage = "Please reenter :";
+    private static final Scanner scanner = new Scanner(System.in);
+    private static final String reenterMessage = "Please reenter :";
     //#endregion
 
     //#region Getting the input from the user
@@ -40,7 +40,8 @@ public class InputHandler {
             //#endregion
 
             // If the execution goes here, the input was invalid
-            System.out.println("You wrote an invalid answer. Please retry :");
+            System.out.println("You wrote an invalid answer.");
+            System.out.println(reenterMessage);
         }
     }
     /**
@@ -58,7 +59,8 @@ public class InputHandler {
             //#region Check if entered value is a number
             if (!scanner.hasNextInt()) {
                 // Write an error message and go to next iteration (reask)
-                System.out.println("\"" + scanner.next() + "\" is invalid. Entered value is not a number. Please reenter :");
+                System.out.println("\"" + scanner.next() + "\" is invalid. Entered value is not a number.");
+                System.out.println(reenterMessage);
                 continue;
             }
             //#endregion
@@ -67,7 +69,8 @@ public class InputHandler {
             int number = scanner.nextInt();
             if (number < min || number >= max) {
                 // Write an error message and go to next iteration (reask)
-                System.out.println("\"" + number + "\" is invalid. Entered number is outside the range from " + min + " to " + (max - 1) + ". Please reenter :");
+                System.out.println("\"" + number + "\" is invalid. Entered number is outside the range from " + min + " to " + (max - 1) + ".");
+                System.out.println(reenterMessage);
                 continue;
             }
             //#endregion
@@ -93,7 +96,8 @@ public class InputHandler {
             //#region Check if line is empty (.trim() removes whitespaces)
             if (command[0].trim().length() == 0) {
                 // Write an error message and go to next iteration (reask)
-                System.out.println("You have entered an empty line. Please reenter :");
+                System.out.println("You have entered an empty line.");
+                System.out.println(reenterMessage);
                 continue;
             }
             //#endregion
@@ -121,7 +125,7 @@ public class InputHandler {
                     // There is something wrong with the arguments
                     // Write an error message and go to next iteration
                     System.out.println(e.getMessage());
-                    System.out.println("Please reenter :");
+                    System.out.println(reenterMessage);
                     continue;
                 }
             }
@@ -129,7 +133,7 @@ public class InputHandler {
                 // The command does not exist
                 // Write an error message and go to next iteration
                 System.out.println(e.getMessage());
-                System.out.println("Please reenter :");
+                System.out.println(reenterMessage);
                 continue;
             }
             //#endregion
@@ -144,14 +148,18 @@ public class InputHandler {
      * @return Integer representing the number (-1 if error)
      */
     public static int parseFromAlphabetNumber(String text) {
-        // If the string isn't a number - return error (-1)
-        if (!isAlphabetNumber(text))
-            return -1;
+        // If the string is empty, do not even bother checking
+        if (text.length() == 0)
+            throw new IllegalArgumentException("Invalid input for " + text);
 
         int ouptut = 0;
         int powers = text.length() - 1;
         // For each character
         for (int i = 0; i < text.length(); i++) {
+            // If the character is invalid, stop parsing
+            if (text.charAt(i) < 'a' || text.charAt(i) > 'z')
+                throw new IllegalArgumentException("Invalid input for " + text);
+
             int currentNumber = text.charAt(i) - 'a' + 1;
             // Add it to result (paying attention to the power)
             ouptut += Math.pow(26, powers - i) * currentNumber;
