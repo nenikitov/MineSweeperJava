@@ -61,25 +61,39 @@ public class GameInstructionData {
      */
     private void transformArgumentsToCoords() {
         //#region Initialize and parse values
-        // Both arguments as numbers
-        int numberArgument0 = InputHandler.parseFromNumber(this.arguments[0]);
-        int numberArgument1 = InputHandler.parseFromNumber(this.arguments[1]);
-
-        // Both arguments as alphabet numbers
+        //#region Both arguments as numbers
+        int numberArgument0;
+        int numberArgument1;
+        
+        try {
+            numberArgument0 = Integer.parseInt(this.arguments[0]);
+        }
+        catch (NumberFormatException e) {
+            numberArgument0 = -1;
+        }
+        try {
+            numberArgument1 = Integer.parseInt(this.arguments[1]);
+        }
+        catch (NumberFormatException e) {
+            numberArgument1 = -1;
+        }
+        //#endregion
+        //#region Both arguments as alphabet numbers
         int alphabetArgument0 = InputHandler.parseFromAlphabetNumber(this.arguments[0]);
         int alphabetArgument1 = InputHandler.parseFromAlphabetNumber(this.arguments[1]);
-        ////#endregion
+        //#endregion
+        //#endregion
 
         //#region Check if there is a valid configuration (one of the coordinates should be represented as a number, the other as alphabet)
         // Verify the validity of 2 configuraions (coordinates "3 a" and "a 3" should be both valid)
-        boolean validAlphabet0Number1 = alphabetArgument0 != -1 && numberArgument1 != -1;
-        boolean validNumber0Alphabet1 = numberArgument0 != -1 && alphabetArgument1 != -1;
-        if (!(validAlphabet0Number1 || validNumber0Alphabet1))
+        boolean validConfigAlphabet0Number1 = alphabetArgument0 != -1 && numberArgument1 != -1;
+        boolean validConfigNumber0Alphabet1 = numberArgument0 != -1 && alphabetArgument1 != -1;
+        if (!(validConfigAlphabet0Number1 || validConfigNumber0Alphabet1))
             throw new IllegalArgumentException("The coordinates are not given in the right format (like \"5 a\" or \"a 5\").");
         //#endregion
 
         //#region Determine which coordinate is X and which is Y and set the arguments accordingly
-        if (validAlphabet0Number1) {
+        if (validConfigAlphabet0Number1) {
             arguments[0] = Integer.toString(alphabetArgument0);
             arguments[1] = Integer.toString(numberArgument1 - 1);
         }

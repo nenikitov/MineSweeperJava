@@ -61,8 +61,8 @@ public class MineSweeper {
                 }
                 case TILE_MARK_CLEAR: {
                     // Get coords of the input
-                    int x = InputHandler.parseFromNumber(instruction.getArguments()[0]);
-                    int y = InputHandler.parseFromNumber(instruction.getArguments()[1]);
+                    int x = Integer.parseInt(instruction.getArguments()[0]);
+                    int y = Integer.parseInt(instruction.getArguments()[1]);
                     // Execute and get the result
                     TileInteractionResults interactionResult = mineField.markClearAt(x, y);
                     //#region Print the confirmation message
@@ -75,8 +75,8 @@ public class MineSweeper {
                 }
                 case TILE_MARK_FLAG: {
                     // Get coords of the input
-                    int x = InputHandler.parseFromNumber(instruction.getArguments()[0]);
-                    int y = InputHandler.parseFromNumber(instruction.getArguments()[1]);
+                    int x = Integer.parseInt(instruction.getArguments()[0]);
+                    int y = Integer.parseInt(instruction.getArguments()[1]);
                     // Execute and get the result
                     TileInteractionResults interactionResult = mineField.markFlagAt(x, y);
                     //#region Print the confirmation message
@@ -89,8 +89,8 @@ public class MineSweeper {
                 }
                 case TILE_MARK_QUESTION: {
                     // Get coords of the input
-                    int x = InputHandler.parseFromNumber(instruction.getArguments()[0]);
-                    int y = InputHandler.parseFromNumber(instruction.getArguments()[1]);
+                    int x = Integer.parseInt(instruction.getArguments()[0]);
+                    int y = Integer.parseInt(instruction.getArguments()[1]);
                     // Execute and get the result
                     TileInteractionResults interactionResult = mineField.markQuestionAt(x, y);
                     //#region Print the confirmation message
@@ -103,8 +103,8 @@ public class MineSweeper {
                 }
                 case TILE_OPEN: {
                     // Get coords of the input
-                    int x = InputHandler.parseFromNumber(instruction.getArguments()[0]);
-                    int y = InputHandler.parseFromNumber(instruction.getArguments()[1]);
+                    int x = Integer.parseInt(instruction.getArguments()[0]);
+                    int y = Integer.parseInt(instruction.getArguments()[1]);
                     // Execute and get the result
                     TileInteractionResults interactionResult = mineField.openAt(x, y);
                     //#region Print the confirmation message
