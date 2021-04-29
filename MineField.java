@@ -144,7 +144,6 @@ public class MineField {
     public boolean isValidInstructionData(GameInstructionData instruction) {
         switch (instruction.getType()) {
             case TILE_MARK_CLEAR: case TILE_MARK_FLAG: case TILE_MARK_QUESTION: case TILE_OPEN:
-                instruction.transformArgumentsToCoords();
                 int x = InputHandler.parseFromNumber(instruction.getArguments()[0]);
                 int y = InputHandler.parseFromNumber(instruction.getArguments()[1]);
 

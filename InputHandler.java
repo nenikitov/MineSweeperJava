@@ -5,23 +5,15 @@ import java.util.Scanner;
  */
 public class InputHandler {
     //#region Fields
-    private Scanner scanner;
-    //#endregion
-
-    //#region Constructors
-    /**
-     * Initialize Input Handler
-     */
-    InputHandler() {
-        scanner = new Scanner(System.in);
-    }
+    private static Scanner scanner = new Scanner(System.in);
+    private static String reenterMessage = "Please reenter :";
     //#endregion
 
     //#region Getting the input from the user
     /**
      * Prompt user to press enter key
      */
-    public void promptEnter() {
+    public static void promptEnter() {
         // Initial message
         System.out.println("Please press ENTER to continue: ");
         scanner.nextLine();
@@ -30,7 +22,7 @@ public class InputHandler {
      * Prompt user a boolean value
      * @return A valid boolean that user entered
      */
-    public boolean promptBoolean() {
+    public static boolean promptBoolean() {
         // Initial message
         System.out.println("Are you sure? ");
 
@@ -57,7 +49,7 @@ public class InputHandler {
      * @param max Maximum number that the user can enter (exclusive)
      * @return A valid number that the user entered
      */
-    public int promptNumber(int min, int max) {
+    public static int promptNumber(int min, int max) {
         // Initial message
         System.out.println("Please enter a number. It should be from " + min + " to " + (max - 1) + " :");
 
@@ -89,7 +81,7 @@ public class InputHandler {
      * Prompt user the game command
      * @return A valid game instruction data {@link GameInstructionData} that the user entered. WARNING: provides little data validation of arguments 
      */
-    public GameInstructionData promptGameInstruction() {
+    public static GameInstructionData promptGameInstruction() {
         // Initial message
         System.out.println("Please enter the command :");
         
@@ -111,31 +103,33 @@ public class InputHandler {
                 command[i] = command[i].toLowerCase();
             //#endregion
 
-            //#region Check if command exists in the list of commands
-            if (!isGameCommand(command[0])) {
-                // Write an error message and go to next iteration (reask)
-                System.out.println("\"" + command[0] + "\" is unknown command. Write \"help\" to get the documentation how to play the game. Please reenter :" );
+            //#region Check if the command is valid
+            try {
+                GameCommands currentCommand = GameInstructionData.findGameCommand(command[0]);
+
+                //#region Generate an array of arguments (the array of the command without the first part)
+                String[] arguments = new String[command.length - 1];
+                for (int i = 0; i < arguments.length; i++)
+                    arguments[i] = command[i + 1];
+                //#endregion
+
+                try {
+                    // Generate the command and return it
+                    return new GameInstructionData(currentCommand, arguments);
+                }
+                catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
+                    System.out.println("Please reenter :");
+                    continue;
+                }
+            }
+            catch (IllegalArgumentException e) {
+                // Write an error message and go to next iteration
+                System.out.println(e.getMessage());
+                System.out.println("Please reenter :");
                 continue;
             }
             //#endregion
-
-            //#region Check if the number of attributes is right
-            GameCommands commandAction = findGameCommand(command[0]);
-            if (command.length - 1 != commandAction.getNumberOfArguments()) {
-                // Write an error message and go to next iteration (reask)
-                System.out.println("The command \"" + command[0] + "\" needs " + commandAction.getNumberOfArguments() + " attributes. You entered " + (command.length - 1) + ". Please reenter :");
-                continue;
-            }
-            //#endregion
-
-            // If the execution goes here, the input is valid
-            //#region Generate an array of arguments (the array of the command without the first part)
-            String[] arguments = new String[command.length - 1];
-            for (int i = 0; i < arguments.length; i++)
-                arguments[i] = command[i + 1];
-            //#endregion
-            // Return everything
-            return new GameInstructionData(commandAction, arguments);
         }
     }
     //#endregion
@@ -212,24 +206,6 @@ public class InputHandler {
     //#endregion
 
     //#region Helper methods
-    private boolean isGameCommand(String input) {
-        for (GameCommands action : GameCommands.values()) {
-            for (String alias : action.getAliases()) {
-                if (alias.equals(input))
-                    return true;
-            }
-        }
-        return false;
-    }
-    private GameCommands findGameCommand(String input) {
-        for (GameCommands action : GameCommands.values()) {
-            for (String alias : action.getAliases()) {
-                if (alias.equals(input))
-                    return action;
-            }
-        }
-        return GameCommands.GAME_HELP;
-    }
     private static boolean isNumber(String text) {
         if (text.length() == 0)
             return false;
