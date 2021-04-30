@@ -1,4 +1,8 @@
+package gameplay;
+
 import java.util.Random;
+import tiles.Tile;
+import tiles.TileInteractionResults;
 
 /**
  * The class that generates and stores the state of the gameplay mine field. Is used to interact with tiles

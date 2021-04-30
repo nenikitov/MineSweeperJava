@@ -1,3 +1,5 @@
+package tiles;
+
 /**
  * The class that represents the tile in the mine field
  */
