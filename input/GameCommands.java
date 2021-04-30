@@ -1,3 +1,5 @@
+package input;
+
 /**
  * The list of all the commands that the user can use during the gameplay
  */

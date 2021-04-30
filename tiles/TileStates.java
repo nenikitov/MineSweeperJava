@@ -1,3 +1,5 @@
+package tiles;
+
 /**
  * The list of all the tile state
  */
