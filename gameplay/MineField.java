@@ -1,6 +1,7 @@
 package gameplay;
 
 import java.util.Random;
+import input.InputHandler;
 import tiles.Tile;
 import tiles.TileInteractionResults;
 import tiles.TileStates;
@@ -176,9 +177,29 @@ public class MineField {
      * Convert the mine field to readable format
     */
     public String toString() {
-        String output = "";
+        String output = "   |";
+        // Print top coordinates
+        for (int x = 0; x < this.width; x++) {
+            String coord = InputHandler.parseToAlphabetNumber(x);
+            for (int i = coord.length(); i < 3; i++)
+                coord += " ";
+            coord += "|";
+            output += coord;
+        }
+        output += "\n";
+
+        // Print line divisor
+        for (int x = 0; x <= this.width; x++) {
+            output += "───┼";
+        }
+        output += "\n";
+
         // Go through each tile
         for (int y = 0; y < this.height; y++) {
+            String coord = Integer.toString(y + 1);
+            for (int i = coord.length(); i < 3; i++)
+                coord += " ";
+            output += coord + "|";
             for (int x = 0; x < this.width; x++) {
                 output += tiles[y][x];
             }
