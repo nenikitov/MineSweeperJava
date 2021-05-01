@@ -141,19 +141,17 @@ public class MineField {
     }
 
     
-    public int getTilesLeftToOpen() {
-        int counter = 0;
-
+    public boolean isGameWon() {
         for (int y = 0; y < this.height; y++) {
             for (int x = 0; x < this.width; x++) {
                 // Increment the counter for each tile that is empty, but which is not opened
                 if (!this.tiles[y][x].getMined()
                     && (this.tiles[y][x].getState() != TileStates.OPENED && this.tiles[y][x].getState() != TileStates.EXPLODED))
-                    counter++;
+                    return false;
             }
         }
 
-        return counter;
+        return true;
     }
     //#endregion
 

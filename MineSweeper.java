@@ -18,10 +18,12 @@ public class MineSweeper {
 
     public static void main(String[] args) {
         Player player = new Player(1);
-        MineField mineField = new MineField(15, 7, 0.15);
+        MineField mineField = new MineField(3, 3, 0.1);
 
         // Game loop
-        while (true) {
+        boolean gameLost = false;
+        boolean gameWon = false;
+        while (!(gameLost || gameWon)) {
             System.out.println("============");
             System.out.println(mineField);
 
@@ -140,8 +142,14 @@ public class MineSweeper {
                             System.out.println("You cannot open this tile, it is not interactable.");
                             System.out.println("This turn is skipped...");
                         }
-                        else if (interactionResult == TileInteractionResults.SUCCESS)
+                        else if (interactionResult == TileInteractionResults.EXPLOSION) {
+                            System.out.println("This tile contained a mine.");
+                            gameLost = player.openedMine();
+                        }
+                        else if (interactionResult == TileInteractionResults.SUCCESS) {
                             System.out.println("Sucessfully opened this tile.");
+                            gameWon = mineField.isGameWon();
+                        }
                         //#endregion
                     }
                     catch (IndexOutOfBoundsException e) {
@@ -151,7 +159,6 @@ public class MineSweeper {
                     break;
                 }
             }
-            System.out.println(mineField.getTilesLeftToOpen());
         }
     }
 }
