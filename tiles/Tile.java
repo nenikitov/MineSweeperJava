@@ -102,6 +102,13 @@ public class Tile {
         return this.state;
     }
     /**
+     * Get the number of mines in adjacent tiles
+     * @return The number of mines in adjacent tiles
+     */
+    public int getMinesNear() {
+        return this.minesNear;
+    }
+    /**
      * Get if the tile is mined
      * @return Is the tile mined
      */

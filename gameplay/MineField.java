@@ -95,7 +95,20 @@ public class MineField {
             this.populateField(x, y);
 
         // Open the tile
-        return tiles[y][x].open();
+        if (this.tiles[y][x].getMinesNear() != 0 || this.tiles[y][x].getMined())
+            return tiles[y][x].open();
+        else {
+            this.tiles[y][x].open();
+            for (int relativeY = y - 1; relativeY <= y + 1; relativeY++) {
+                for (int relativeX = x - 1; relativeX <= x + 1; relativeX++) {
+                    if (this.isValidCoord(relativeX, relativeY)) {
+                        if (this.tiles[relativeY][relativeX].getState() != TileStates.OPENED)
+                            openAt(relativeX, relativeY);
+                    }
+                }
+            }
+            return TileInteractionResults.SUCCESS;
+        }
     }
     /**
      * Mark with a flag the tile at specific coordinates
