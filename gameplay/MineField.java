@@ -3,6 +3,7 @@ package gameplay;
 import java.util.Random;
 import tiles.Tile;
 import tiles.TileInteractionResults;
+import tiles.TileStates;
 
 /**
  * The class that generates and stores the state of the gameplay mine field. Is used to interact with tiles
@@ -137,6 +138,22 @@ public class MineField {
 
         // Clear the marks from the tile
         return tiles[y][x].markClear();
+    }
+
+    
+    public int getTilesLeftToOpen() {
+        int counter = 0;
+
+        for (int y = 0; y < this.height; y++) {
+            for (int x = 0; x < this.width; x++) {
+                // Increment the counter for each tile that is empty, but which is not opened
+                if (!this.tiles[y][x].getMined()
+                    && (this.tiles[y][x].getState() != TileStates.OPENED && this.tiles[y][x].getState() != TileStates.EXPLODED))
+                    counter++;
+            }
+        }
+
+        return counter;
     }
     //#endregion
 

@@ -93,6 +93,15 @@ public class Tile {
     }
     //#endregion
 
+    //#region Getters
+    public TileStates getState() {
+        return this.state;
+    }
+    public boolean getMined() {
+        return this.mined;
+    }
+    //#endregion
+
     //#region Other
     /** 
      * Convert the tile to readable format

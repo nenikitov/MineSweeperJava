@@ -151,6 +151,7 @@ public class MineSweeper {
                     break;
                 }
             }
+            System.out.println(mineField.getTilesLeftToOpen());
         }
     }
 }
