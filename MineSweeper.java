@@ -17,8 +17,8 @@ public class MineSweeper {
     */
 
     public static void main(String[] args) {
-        Player player = new Player(1);
-        MineField mineField = new MineField(3, 3, 0.1);
+        Player player = new Player(2);
+        MineField mineField = new MineField(15, 5, 0.15);
 
         // Game loop
         boolean gameLost = false;

@@ -94,9 +94,17 @@ public class Tile {
     //#endregion
 
     //#region Getters
+    /**
+     * Get the state of the tile
+     * @return State of the tile {@link TileStates}
+     */
     public TileStates getState() {
         return this.state;
     }
+    /**
+     * Get if the tile is mined
+     * @return Is the tile mined
+     */
     public boolean getMined() {
         return this.mined;
     }

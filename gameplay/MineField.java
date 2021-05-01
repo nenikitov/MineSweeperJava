@@ -140,7 +140,10 @@ public class MineField {
         return tiles[y][x].markClear();
     }
 
-    
+    /**
+     * Return if the game is won (all the tiles that should be opened are opened)
+     * @return Is the game won
+     */
     public boolean isGameWon() {
         for (int y = 0; y < this.height; y++) {
             for (int x = 0; x < this.width; x++) {
