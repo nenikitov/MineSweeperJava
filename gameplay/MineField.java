@@ -190,7 +190,7 @@ public class MineField {
 
         // Print line divisor
         for (int x = 0; x <= this.width; x++) {
-            output += "---+";
+            output += (char)0x2500 + "" +  (char)0x2500 + "" + (char)0x2500 + "" + (char)0x253C;
         }
         output += "\n";
 

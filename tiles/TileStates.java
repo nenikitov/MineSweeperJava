@@ -5,7 +5,7 @@ package tiles;
  */
 public enum TileStates {
     //#region enum entries
-    CLOSED           ('■'),
+    CLOSED           ((char)0x25A0),
     OPENED           (' '),
     MARKED_FLAG      ('P'),
     MARKED_QUESTION  ('?'),
