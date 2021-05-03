@@ -2,16 +2,17 @@ package difficulty;
 
 public enum Difficulties {
     //#region Enum entries
-    TRIVIAL("Piece of cake"                    , 8, 6, 0.15, 2),
-    EASY   ("Mine Me Plenty"                   , 8, 6, 0.15, 2),
-    NORMAL ("Throu Art a Defuse Meister"       , 8, 6, 0.15, 2),
-    HARD   ("They Call Me \"The Mine Sweeper\"", 8, 6, 0.15, 2),
-    UNFAIR ("Minecore!"                        , 8, 6, 0.15, 2),
-    CUSTOM ("Mine your own Custom Mine Field"  , 0, 0, 0   , 0);
+    TRIVIAL("Piece of Cake"                    , "Easy mode for beginners"                  , 8 , 6 , 0.1 , 2),
+    EASY   ("Mine Me Plenty"                   , "A bit harder, but still easy"             , 10, 8 , 0.12, 2),
+    NORMAL ("Throu Art a Defuse Meister"       , "The right mode for intermediate players"  , 15, 8 , 0.15, 1),
+    HARD   ("They Call Me \"The Mine Sweeper\"", "About as difficult as you want to go"     , 20, 10, 0.2 , 1),
+    UNFAIR ("Minecore!"                        , "This skill level isn't even remotely fair", 25, 15, 0.25, 1),
+    CUSTOM ("Mine Your own Custom Mine Field"  , "Set up the difficulty yourself"           , 0 , 0 , 0   , 0);
     //#endregion
 
     //#region Enum fields
     private final String name;
+    private final String description;
     private final int width;
     private final int height;
     private final double minePercentage;
@@ -19,8 +20,9 @@ public enum Difficulties {
     //#endregion
 
     //#region Constructors
-    private Difficulties(String name, int width, int height, double minePercentage, int playerLives) {
+    private Difficulties(String name, String description, int width, int height, double minePercentage, int playerLives) {
         this.name = name;
+        this.description = description;
         this.width = width;
         this.height = height;
         this.minePercentage = minePercentage;
@@ -29,20 +31,23 @@ public enum Difficulties {
     //#endregion
 
     //#region Getters
-    public int getPlayerLives() {
-        return this.playerLives;
+    public String getName() {
+        return this.name;
     }
-    public double getMinePercentage() {
-        return this.minePercentage;
-    }
-    public int getHeight() {
-        return this.height;
+    public String getDescription() {
+        return description;
     }
     public int getWidth() {
         return this.width;
     }
-    public String getName() {
-        return this.name;
+    public int getHeight() {
+        return this.height;
+    }
+    public double getMinePercentage() {
+        return this.minePercentage;
+    }
+    public int getPlayerLives() {
+        return this.playerLives;
     }
     //#endregion
 }
