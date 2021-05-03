@@ -13,7 +13,6 @@ public class MineField {
     //#region Fields
     private int width;
     private int height;
-    private double difficulty;
     private Tile[][] tiles;
     private boolean isPopulated;
     private int mines;
@@ -24,14 +23,13 @@ public class MineField {
      * Initialize the mine field object
      * @param widt The width of a playing field
      * @param height The height of a playing field
-     * @param difficulty The difficulty (percentage from 0 to 1) that indicated the mine count
+     * @param minePercentage The difficulty (percentage from 0 to 1) that indicated the mine count
      */
-    public MineField(int width, int height, double difficulty) {
+    public MineField(int width, int height, double minePercentage) {
         this.width = width;
         this.height = height;
-        this.difficulty = difficulty;
         this.isPopulated = false;
-        mines = (int)Math.round(this.width * this.height * this.difficulty);
+        mines = (int)Math.round(this.width * this.height * minePercentage);
         this.tiles = new Tile[height][width];
         for (int y = 0; y < height; y++)
             for (int x = 0; x < width; x++)

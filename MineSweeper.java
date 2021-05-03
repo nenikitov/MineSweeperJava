@@ -16,17 +16,52 @@ public class MineSweeper {
     */
 
     public static void main(String[] args) {
+        //#region Initial setup
+        Player player;
+        MineField mineField;
+        int width = 0;
+        int height = 0;
+        double minePercentage = 0;
+        int playerLives = 0;
+        boolean shouldAskForDifficulty = true;
+        //#endregion
+
         //#region Difficulty selection
-        System.out.println(Difficulties.UNFAIR);
+        if (shouldAskForDifficulty) {
+            // Print difficulties
+            Difficulties[] difficulties = Difficulties.values();
+            System.out.println("Select the difficulty:");
+            System.out.println("Option  | Name                                    | Description                                     | Dimensions        | Mine percentage   | Player lives");
+            System.out.println("--------+-----------------------------------------+-------------------------------------------------+-------------------+-------------------+-------------");
+            for (int i = 0; i < difficulties.length; i++)
+                System.out.println((i + 1) + "\t| " + difficulties[i]);
+
+            // Ask the option
+            int difficultyIndex = InputHandler.promptNumber(1, difficulties.length + 1) - 1;
+            if (difficultyIndex != 0) {
+                // If not a custom difficutly, assign predefined values
+                Difficulties selectedDifficulty = difficulties[difficultyIndex];
+                width = selectedDifficulty.getWidth();
+                height = selectedDifficulty.getHeight();
+                minePercentage = selectedDifficulty.getMinePercentage();
+                playerLives = selectedDifficulty.getPlayerLives();
+            }
+            else {
+                System.out.println("=== WIDTH ===");
+                width = InputHandler.promptNumber(3, 51);
+                System.out.println("=== HEIGHT ===");
+                height = InputHandler.promptNumber(3, 51);
+                System.out.println("=== MINE PERCENTAGE ===");
+                minePercentage = InputHandler.promptNumber(5, 31) / 100.0;
+                System.out.println("=== PLAYER LIVES ===");
+                playerLives = InputHandler.promptNumber(1, 11);
+            }
+        }
         //#endregion
 
         //#region Game initialization
-        Player player = new Player(2);
-        int width = 0;
-        int height = 0;
-        double difficulty = 0;
-
-        MineField mineField = new MineField(5, 3, 0.15);
+        player = new Player(playerLives);
+        mineField = new MineField(width, height, minePercentage);
         //#endregion
 
         //#region Game loop
