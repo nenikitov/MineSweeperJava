@@ -16,6 +16,7 @@ public class MineField {
     private double difficulty;
     private Tile[][] tiles;
     private boolean isPopulated;
+    private int mines;
     //#endregion
 
     //#region Constructors
@@ -30,6 +31,7 @@ public class MineField {
         this.height = height;
         this.difficulty = difficulty;
         this.isPopulated = false;
+        mines = (int)Math.round(this.width * this.height * this.difficulty);
         this.tiles = new Tile[height][width];
         for (int y = 0; y < height; y++)
             for (int x = 0; x < width; x++)
@@ -56,8 +58,7 @@ public class MineField {
 
         // Generate a 2d boolean array that stores the info about the tiles that should be mines
         boolean[][] minedTiles = new boolean[this.height][this.width];
-        int minesToPlace = (int)Math.round(this.width * this.height * this.difficulty);
-        for (int i = 0; i < minesToPlace; i++) {
+        for (int i = 0; i < mines; i++) {
             int coordX = this.indexToCoords(possibleTileIndexes[i])[0];
             int coordY = this.indexToCoords(possibleTileIndexes[i])[1];
 
@@ -207,6 +208,29 @@ public class MineField {
         }
 
         return output;
+    }
+    /**
+     * Get the number of mines that this minefield contains
+     * @return Number of mines
+     */
+    public int getMines() {
+        return this.mines;
+    }
+    /**
+     * Get the number of tiles that are flagged
+     * @return The number of tiles that are flagged
+     */
+    public int getFlags() {
+        int counter = 0;
+
+        for (Tile[] row : tiles) {
+            for (Tile tile : row) {
+                if (tile.getState() == TileStates.MARKED_FLAG)
+                    counter++;
+            }
+        }
+
+        return counter;
     }
     //#endregion
     

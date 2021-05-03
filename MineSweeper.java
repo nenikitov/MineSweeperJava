@@ -22,7 +22,12 @@ public class MineSweeper {
         boolean gameLost = false;
         boolean gameWon = false;
         while (!(gameLost || gameWon)) {
-            System.out.println("============");
+            System.out.println();
+            System.out.println("============================");
+            System.out.println("Lives Left   : " + player.getLives());
+            System.out.println("Total Mines  : " + mineField.getMines());
+            System.out.println("Flags Placed : " + mineField.getFlags());
+            System.out.println();
             System.out.println(mineField);
 
             GameInstructionData instruction = InputHandler.promptGameInstruction();

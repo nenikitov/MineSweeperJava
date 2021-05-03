@@ -18,6 +18,15 @@ public class Player {
     }
     //#endregion
 
+    //#region Getters
+    /**
+     * Get the number of lives that the player has
+     * @return Number of lives
+     */
+    public int getLives() {
+        return this.lives;
+    }
+
     //#region Other
     /**
      * Subtract a live and return if game should be over
