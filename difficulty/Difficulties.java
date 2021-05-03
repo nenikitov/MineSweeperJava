@@ -30,24 +30,35 @@ public enum Difficulties {
     }
     //#endregion
 
-    //#region Getters
-    public String getName() {
-        return this.name;
-    }
-    public String getDescription() {
-        return description;
-    }
-    public int getWidth() {
-        return this.width;
-    }
-    public int getHeight() {
-        return this.height;
-    }
-    public double getMinePercentage() {
-        return this.minePercentage;
-    }
-    public int getPlayerLives() {
-        return this.playerLives;
+    //#region Other
+    public String toString() {
+        // Start with empty
+        String output = "";
+
+        // Add name and make it aligned to table grid
+        output += this.name;
+        while (output.length() < 40)
+            output += " ";
+        
+        // Add description
+        output += this.description;
+        while (output.length() < 90)
+            output += " ";
+
+        // Add mine field dimenstions
+		output += (this.width != 0 && this.height != 0) ? this.width + "x" + this.height : "N.A.";
+        while (output.length() < 110)
+            output += " ";
+        
+        // Add mine percentage
+		output += (this.minePercentage != 0) ? (int)(this.minePercentage * 100) + "%" : "N.A.";
+        while (output.length() < 130)
+            output += " ";
+        
+        // Add player lives
+		output += (this.playerLives != 0) ? this.playerLives : "N.A.";
+
+        return output;
     }
     //#endregion
 }

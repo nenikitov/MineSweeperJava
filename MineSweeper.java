@@ -1,3 +1,4 @@
+import difficulty.Difficulties;
 import gameplay.MineField;
 import gameplay.Player;
 import input.GameCommands;
@@ -16,7 +17,7 @@ public class MineSweeper {
 
     public static void main(String[] args) {
         //#region Difficulty selection
-        
+        System.out.println(Difficulties.UNFAIR);
         //#endregion
 
         //#region Game initialization

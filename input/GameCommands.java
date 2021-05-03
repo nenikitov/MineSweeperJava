@@ -61,7 +61,7 @@ public enum GameCommands {
         }
 
         // Make everything aligned to the table in documentation
-        for (int i = output.length(); i < 20; i++)
+        while (output.length() < 20)
             output += " ";
         output += "| ";
 
@@ -69,7 +69,7 @@ public enum GameCommands {
         output += this.arguments;
 
         // Make everything aligned to the table in documentation
-        for (int i = output.length(); i < 40; i++)
+        while (output.length() < 40)
             output += " ";
         output += "| ";
 
