@@ -16,9 +16,9 @@ public class MineSweeper {
 
     public static void main(String[] args) {
         Player player = new Player(2);
-        MineField mineField = new MineField(10, 5, 0.15);
+        MineField mineField = new MineField(5, 3, 0.15);
 
-        // Game loop
+        //#region Game loop
         boolean gameLost = false;
         boolean gameWon = false;
         while (!(gameLost || gameWon)) {
@@ -163,5 +163,18 @@ public class MineSweeper {
                 }
             }
         }
+        //#endregion
+
+        //#region End game screen
+        System.out.println("============================");
+        System.out.println("GAME FINISHED: ");
+        System.out.println(gameWon ? "You opened all empty tiles..." : "You opened too many mined tiles...");
+        System.out.println(gameWon ? "You won!" : "You lost!");
+        System.out.println();
+        System.out.println("Final minefield state: ");
+        System.out.println(mineField);
+        System.out.println();
+        InputHandler.promptEnter();
+        //#endregion
     }
 }
