@@ -15,8 +15,18 @@ public class MineSweeper {
     */
 
     public static void main(String[] args) {
+        //#region Difficulty selection
+        
+        //#endregion
+
+        //#region Game initialization
         Player player = new Player(2);
+        int width = 0;
+        int height = 0;
+        double difficulty = 0;
+
         MineField mineField = new MineField(5, 3, 0.15);
+        //#endregion
 
         //#region Game loop
         boolean gameLost = false;
