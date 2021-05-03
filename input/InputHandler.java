@@ -187,8 +187,8 @@ public class InputHandler {
         number++;
         // For each digit
         while (number > 0) {
-            int currentDigit = number % 26 - 1;
-            number /= 26;
+            int currentDigit = (number - 1) % 26;
+            number /= 27;
             // Append it to result
             output = (char)(currentDigit + 'a') + output;
         }
