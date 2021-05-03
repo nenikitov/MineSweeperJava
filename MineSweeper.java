@@ -11,6 +11,7 @@ public class MineSweeper {
      * 
      * ASCII and unicode stuff. DrJava prints in Unicode (for some reason), which breaks all the table building characters...
      * So I will need to change line 26 in MineSweeper, line 17 in MineField and line 7 in tile states
+     * "-" and "+" for table building, "#" for unopened tiles
     */
 
     public static void main(String[] args) {
