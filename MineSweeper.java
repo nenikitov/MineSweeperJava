@@ -106,7 +106,8 @@ public class MineSweeper {
                         break;
                     }
                     case GAME_RESTART: {
-                        break;
+                        shouldAskForDifficulty = true;
+                        continue GameReset;
                     }
                     case TILE_MARK_CLEAR: {
                         // Get coords of the input
