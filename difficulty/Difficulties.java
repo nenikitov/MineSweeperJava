@@ -5,7 +5,7 @@ public enum Difficulties {
     CUSTOM ("Mine Your own Custom Mine Field"  , "Set up the difficulty yourself"           , 0 , 0 , 0   , 0),
     TRIVIAL("Piece of Cake"                    , "Easy mode for beginners"                  , 8 , 6 , 0.1 , 2),
     EASY   ("Mine Me Plenty"                   , "A bit harder, but still easy"             , 10, 8 , 0.12, 2),
-    NORMAL ("Throu Art a Defuse Meister"       , "The right mode for intermediate players"  , 15, 8 , 0.15, 1),
+    NORMAL ("Thou Art a Defuse Meister"        , "The right mode for intermediate players"  , 15, 8 , 0.15, 1),
     HARD   ("They Call Me \"The Mine Sweeper\"", "About as difficult as you want to go"     , 20, 10, 0.2 , 1),
     UNFAIR ("Minecore!"                        , "This skill level isn't even remotely fair", 30, 15, 0.25, 1);
     //#endregion
