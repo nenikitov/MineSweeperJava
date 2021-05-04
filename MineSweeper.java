@@ -92,7 +92,15 @@ public class MineSweeper {
                         break;
                     }
                     case GAME_INSTANT_RETRY: {
-                        continue GameReset;
+                        // Get the confirmation
+                        System.out.println("You want to retry the game. (Play the game with the same settings)");
+                        boolean result = InputHandler.promptBoolean();
+                        
+                        // Retry if the confirmation was recieved
+                        if (result)
+                            continue GameReset;
+                        
+                        break;
                     }
                     case GAME_QUIT: {
                         // Get the confirmation
@@ -106,8 +114,17 @@ public class MineSweeper {
                         break;
                     }
                     case GAME_RESTART: {
-                        shouldAskForDifficulty = true;
-                        continue GameReset;
+                        // Get the confirmation
+                        System.out.println("You want to restart the game. (Set the different difficulty and play again)");
+                        boolean result = InputHandler.promptBoolean();
+                        
+                        // Restart if the confirmation was recieved
+                        if (result) {
+                            shouldAskForDifficulty = true;
+                            continue GameReset;
+                        }
+                        
+                        break;
                     }
                     case TILE_MARK_CLEAR: {
                         // Get coords of the input
