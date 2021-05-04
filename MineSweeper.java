@@ -18,7 +18,7 @@ public class MineSweeper {
         boolean shouldAskForDifficulty = true;
         //#endregion
 
-        //#region Game loop
+        //#region Game loop (with/without difficulty selection and with game reset)
         GameReset: while (true) {
             //#region Difficulty selection
             if (shouldAskForDifficulty) {
@@ -223,18 +223,18 @@ public class MineSweeper {
                 }
             }
             //#endregion
-
+            
             //#region End game screen
-        System.out.println("============================");
-        System.out.println("GAME FINISHED: ");
-        System.out.println(gameWon ? "You opened all empty tiles..." : "You opened too many mined tiles...");
-        System.out.println(gameWon ? "You won!" : "You lost!");
-        System.out.println();
-        System.out.println("Final minefield state: ");
-        System.out.println(mineField);
-        System.out.println();
-        InputHandler.promptEnter();
-        //#endregion
+            System.out.println("============================");
+            System.out.println("GAME FINISHED: ");
+            System.out.println(gameWon ? "You opened all empty tiles..." : "You opened too many mined tiles...");
+            System.out.println(gameWon ? "You won!" : "You lost!");
+            System.out.println();
+            System.out.println("Final minefield state: ");
+            System.out.println(mineField);
+            System.out.println();
+            InputHandler.promptEnter();
+            //#endregion
         }
         //#endregion
     }
