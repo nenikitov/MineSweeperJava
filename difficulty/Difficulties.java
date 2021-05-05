@@ -73,6 +73,7 @@ public enum Difficulties {
     }
     //#endregion
 
+    //#region Helper methods
     private String completeDescription(String string, int length) {
         // Complete string to target length
         while (string.length() < length)
@@ -82,4 +83,5 @@ public enum Difficulties {
 
         return string;
     }
+    //#endregion
 }
