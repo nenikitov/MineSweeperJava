@@ -52,32 +52,36 @@ public enum GameCommands {
         // Start with empty documentation
         String output = "";
 
-        // Append aliases
+        // Append aliases and align it to the table grid
         for (int i = 0; i < this.aliases.length; i++) {
             output += this.aliases[i];
 
             if (i != this.aliases.length - 1)
                 output += ", ";
         }
+        output = completeDescription(output, 20);
 
-        // Make everything aligned to the table in documentation
-        while (output.length() < 20)
-            output += " ";
-        output += "| ";
-
-        // Append number of arguments
+        // Append number of arguments and align it to table grid
         output += this.arguments;
-
-        // Make everything aligned to the table in documentation
-        while (output.length() < 40)
-            output += " ";
-        output += "| ";
+        output = completeDescription(output, 40);
 
         // Append documentation
         output += this.documentation;
 
         // Output finalized documentation
         return output;
+    }
+    //#endregion
+
+    //#region Helper methods
+    private String completeDescription(String string, int length) {
+        // Complete string to target length
+        while (string.length() < length)
+            string += " ";
+        // Add table line at the end
+        string += "| ";
+
+        return string;
     }
     //#endregion
 }

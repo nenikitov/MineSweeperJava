@@ -275,7 +275,6 @@ public class MineField {
     }
     private void recursivelyOpenAround(int x, int y) {
         // Go through 8 adjacent tiles
-        
         for (int deltaY = -1; deltaY <= 1; deltaY++) {
             for (int deltaX = -1; deltaX <= 1; deltaX++) {
                 int checkX = x + deltaX;
