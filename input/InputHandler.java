@@ -7,8 +7,8 @@ import java.util.Scanner;
  */
 public class InputHandler {
     //#region Fields
-    private static final Scanner scanner = new Scanner(System.in);
-    private static final String reenterMessage = "Please reenter :";
+    private static final Scanner SCANNER = new Scanner(System.in);
+    private static final String REENTER_MESSAGE = "Please reenter :";
     //#endregion
 
     //#region Getting the input from the user
@@ -18,7 +18,7 @@ public class InputHandler {
     public static void promptEnter() {
         // Initial message
         System.out.println("Please press ENTER to continue:");
-        scanner.nextLine();
+        SCANNER.nextLine();
     }
     /**
      * Prompt user a boolean value
@@ -29,7 +29,7 @@ public class InputHandler {
         System.out.println("Are you sure?");
 
         while (true) {
-            String input = scanner.nextLine().toLowerCase();
+            String input = SCANNER.nextLine().toLowerCase();
 
             //#region User entered true
             if (input.equals("yes") || input.equals("y"))
@@ -43,7 +43,7 @@ public class InputHandler {
 
             // If the execution goes here, the input was invalid
             System.out.println("You wrote an invalid answer.");
-            System.out.println(reenterMessage);
+            System.out.println(REENTER_MESSAGE);
         }
     }
     /**
@@ -59,20 +59,20 @@ public class InputHandler {
         // Loop until the function returns
         while (true) {
             //#region Check if entered value is a number
-            if (!scanner.hasNextInt()) {
+            if (!SCANNER.hasNextInt()) {
                 // Write an error message and go to next iteration (reask)
-                System.out.println("\"" + scanner.next() + "\" is invalid. Entered value is not a number.");
-                System.out.println(reenterMessage);
+                System.out.println("\"" + SCANNER.next() + "\" is invalid. Entered value is not a number.");
+                System.out.println(REENTER_MESSAGE);
                 continue;
             }
             //#endregion
 
             //#region Check if the entered number is in bounds
-            int number = scanner.nextInt();
+            int number = SCANNER.nextInt();
             if (number < min || number >= max) {
                 // Write an error message and go to next iteration (reask)
                 System.out.println("\"" + number + "\" is invalid. Entered number is outside the range from " + min + " to " + (max - 1) + ".");
-                System.out.println(reenterMessage);
+                System.out.println(REENTER_MESSAGE);
                 continue;
             }
             //#endregion
@@ -92,14 +92,14 @@ public class InputHandler {
         
         // Loop until function returns
         while (true) {
-            String[] command = scanner.nextLine().split(" ");
+            String[] command = SCANNER.nextLine().split(" ");
             
             // The empty input from the console always has at least "new line" character, so I can safely access the 0th index of the array
             //#region Check if line is empty (.trim() removes whitespaces)
             if (command[0].trim().length() == 0) {
                 // Write an error message and go to next iteration (reask)
                 System.out.println("You have entered an empty line.");
-                System.out.println(reenterMessage);
+                System.out.println(REENTER_MESSAGE);
                 continue;
             }
             //#endregion
@@ -127,7 +127,7 @@ public class InputHandler {
                     // There is something wrong with the arguments
                     // Write an error message and go to next iteration
                     System.out.println(e.getMessage());
-                    System.out.println(reenterMessage);
+                    System.out.println(REENTER_MESSAGE);
                     continue;
                 }
             }
@@ -135,7 +135,7 @@ public class InputHandler {
                 // The command does not exist
                 // Write an error message and go to next iteration
                 System.out.println(e.getMessage());
-                System.out.println(reenterMessage);
+                System.out.println(REENTER_MESSAGE);
                 continue;
             }
             //#endregion
