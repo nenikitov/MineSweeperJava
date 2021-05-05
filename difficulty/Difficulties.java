@@ -47,37 +47,39 @@ public enum Difficulties {
 
     //#region Other
     public String toString() {
-        // Start with empty
+        // Start with empty string
         String output = "";
 
-        // Add name and make it aligned to table grid
+        // Add name and align it to table grid
         output += this.name;
-        while (output.length() < 40)
-            output += " ";
-        output += "| ";
+        output = completeDescription(output, 40);
         
-        // Add description
+        // Add description and align it
         output += this.description;
-        while (output.length() < 90)
-            output += " ";
-        output += "| ";
+        output = completeDescription(output, 90);
 
-        // Add mine field dimenstions
-		output += (this.width != 0 && this.height != 0) ? this.width + "x" + this.height : "N.A.";
-        while (output.length() < 110)
-            output += " ";
-        output += "| ";
+        // Add mine field dimenstions and align it
+        output += (this.width != 0 && this.height != 0) ? this.width + "x" + this.height : "N.A.";
+        output = completeDescription(output, 110);
         
-        // Add mine percentage
-		output += (this.minePercentage != 0) ? (int)(this.minePercentage * 100) + "%" : "N.A.";
-        while (output.length() < 130)
-            output += " ";
-        output += "| ";
+        // Add mine percentage and align it
+        output += (this.minePercentage != 0) ? (int)(this.minePercentage * 100) + "%" : "N.A.";
+        output = completeDescription(output, 130);
         
         // Add player lives
-		output += (this.playerLives != 0) ? this.playerLives : "N.A.";
+        output += (this.playerLives != 0) ? this.playerLives : "N.A.";
 
         return output;
     }
     //#endregion
+
+    private String completeDescription(String string, int length) {
+        // Complete string to target length
+        while (string.length() < length)
+            string += " ";
+        // Add table line at the end
+        string += "| ";
+
+        return string;
+    }
 }
