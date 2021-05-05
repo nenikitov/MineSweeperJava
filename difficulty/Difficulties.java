@@ -1,5 +1,8 @@
 package difficulty;
 
+/**
+ * The list of all possible difficulties
+ */
 public enum Difficulties {
     //#region Enum entries
     CUSTOM ("Mine Your own Custom Mine Field"  , "Set up the difficulty yourself"           , 0 , 0 , 0   , 0),
@@ -31,21 +34,40 @@ public enum Difficulties {
     //#endregion
 
     //#region Getters
+    /**
+     * Get the width of the mine field from the difficulty
+     * @return The width
+     */
     public int getWidth() {
         return this.width;
     }
+    /**
+     * Get the height of the mine field from the difficulty
+     * @return The height
+     */
     public int getHeight() {
         return this.height;
     }
+    /**
+     * Get the mine percentage from the difficulty
+     * @return The mine percentage
+     */
     public double getMinePercentage() {
         return this.minePercentage;
     }
+    /**
+     * Get the number of lives that the player has from the difficulty
+     * @return The number of player lives
+     */
     public int getPlayerLives() {
         return this.playerLives;
     }
     //#endregion
 
     //#region Other
+    /**
+     * Transforms the difficulty stats to the table
+     */
     public String toString() {
         // Start with empty string
         String output = "";
