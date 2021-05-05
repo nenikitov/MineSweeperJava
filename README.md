@@ -20,7 +20,7 @@ Each turn the game displays the state of the mine field. The goal is to open all
 ### Commands
 The game uses console to get player input and output the state of the game. To do so, you should use in-game commands.
 #### Table
-| Command                   | How to execute  | Number of arguments | Action                                                                                      | Example        |
+| Command                   | How to execute  | Number of arguments | Action                                                                                      | Usage&nbsp;Example  |
 |---------------------------|-----------------|---------------------|---------------------------------------------------------------------------------------------|----------------|
 | Open                      | `open`, `o`     | 2                   | Opens the specified tile                                                                    | `open a 5`     |
 | Mark with a Flag          | `flag`, `f`     | 2                   | Marks the specified tile with a flag. Used to mark where you are sure there is a mine       | `flag c 10`    |
