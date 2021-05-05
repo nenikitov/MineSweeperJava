@@ -233,7 +233,15 @@ public class MineSweeper {
             System.out.println("Final minefield state: ");
             System.out.println(mineField);
             System.out.println();
-            InputHandler.promptEnter();
+            System.out.println("What you would like to do?");
+            System.out.println("1\tReplay the game with the same settings");
+            System.out.println("2\tChange the difficulty and replay the game");
+            System.out.println("3\tQuit the game");
+            int choice = InputHandler.promptNumber(1, 4);
+            if (choice == 2)
+                shouldAskForDifficulty = true;
+            if (choice == 3)
+                return;
             //#endregion
         }
         //#endregion
