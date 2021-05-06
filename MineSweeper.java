@@ -43,13 +43,13 @@ public class MineSweeper {
                 }
                 else {
                     System.out.println("Please set up the custom difficulty:");
-                    System.out.println("Enter the width of the mine field:");
+                    System.out.println("=== Enter the width of the mine field: ===");
                     width = InputHandler.promptNumber(5, 51);
-                    System.out.println("Enter the height of the mine field:");
+                    System.out.println("=== Enter the height of the mine field: ===");
                     height = InputHandler.promptNumber(5, 51);
-                    System.out.println("Enter the percentage of the mine tiles:");
+                    System.out.println("=== Enter the percentage of the mine tiles: ===");
                     minePercentage = InputHandler.promptNumber(5, 31) / 100.0;
-                    System.out.println("Enter how many lives the player has:");
+                    System.out.println("=== Enter how many lives the player has: ===");
                     playerLives = InputHandler.promptNumber(1, 11);
                 }
             }
@@ -66,16 +66,9 @@ public class MineSweeper {
             //#region Gameplay loop
             while (!(gameLost || gameWon)) {
                 // Initial print
-                System.out.println();
-                System.out.println("============================");
-                System.out.println("Lives Left   : " + player.getLives());
-                System.out.println("Total Mines  : " + mineField.getMines());
-                System.out.println("Flags Placed : " + mineField.getFlags());
-                System.out.println();
-                System.out.println(mineField);
+                printGameInfo(player, mineField);
 
                 GameInstructionData instruction = InputHandler.promptGameInstruction();
-
                 switch (instruction.getType()) {
                     case GAME_HELP: {
                         //#region Print game documentation
@@ -209,14 +202,21 @@ public class MineSweeper {
     }
 
     //#region Helper methods
-
-
     private static void printTheDifficulties(Difficulties[] difficulties) {
         System.out.println("Select the difficulty:");
         System.out.println("Option  | Name                                    | Description                                     | Dimensions        | Mine percentage   | Player lives");
         System.out.println("--------+-----------------------------------------+-------------------------------------------------+-------------------+-------------------+-------------");
         for (int i = 0; i < difficulties.length; i++)
             System.out.println((i + 1) + "\t| " + difficulties[i]);
+    }
+    private static void printGameInfo(Player player, MineField mineField) {
+        System.out.println();
+        System.out.println("============================");
+        System.out.println("Lives Left   : " + player.getLives());
+        System.out.println("Total Mines  : " + mineField.getMines());
+        System.out.println("Flags Placed : " + mineField.getFlags());
+        System.out.println();
+        System.out.println(mineField);
     }
     private static void printHelp() {
         System.out.println("===== HELP PAGE =====");
