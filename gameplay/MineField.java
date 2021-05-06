@@ -26,10 +26,13 @@ public class MineField {
      * @param minePercentage The difficulty (percentage from 0 to 1) that indicated the mine count
      */
     public MineField(int width, int height, double minePercentage) {
+        // Initialize simple fields
         this.width = width;
         this.height = height;
         this.isPopulated = false;
-        mines = (int)Math.round(this.width * this.height * minePercentage);
+        // Calculate mine count from mine percentage
+        this.mines = (int) Math.round(width * height * minePercentage);
+        // Initialize dummy tiles
         this.tiles = new Tile[height][width];
         for (int y = 0; y < height; y++)
             for (int x = 0; x < width; x++)
@@ -39,7 +42,7 @@ public class MineField {
 
     //#region Mine placement
     private void populateField(int excludeX, int excludeY) {
-        // Generate the array of all possible indexes where the mine can be places (except the exclude coodinate - first move)
+        // Generate the array of all possible indexes where the mine can be placed (except the exclude coodinate for the first move)
         int excludeIndex = coordsToIndex(excludeX, excludeY);
         int[] possibleTileIndexes = new int[this.width * this.height - 1];
         for (int i = 0; i < possibleTileIndexes.length; i++)
@@ -96,17 +99,12 @@ public class MineField {
 
         // Open the tile
         if (this.tiles[y][x].getMinesNear() != 0 || this.tiles[y][x].getMined())
+            // Non recursive opening
             return tiles[y][x].open();
         else {
+            // Recursively open all the tiles around fully empty tile (no mines around)
             this.tiles[y][x].open();
-            for (int relativeY = y - 1; relativeY <= y + 1; relativeY++) {
-                for (int relativeX = x - 1; relativeX <= x + 1; relativeX++) {
-                    if (this.isValidCoord(relativeX, relativeY)) {
-                        if (this.tiles[relativeY][relativeX].getState() != TileStates.OPENED)
-                            openAt(relativeX, relativeY);
-                    }
-                }
-            }
+            recursivelyOpenAround(x, y);
             return TileInteractionResults.SUCCESS;
         }
     }
@@ -158,11 +156,12 @@ public class MineField {
      * @return Is the game won
      */
     public boolean isGameWon() {
+        // Go through each tile
         for (int y = 0; y < this.height; y++) {
             for (int x = 0; x < this.width; x++) {
-                // Increment the counter for each tile that is empty, but which is not opened
                 if (!this.tiles[y][x].getMined()
                     && (this.tiles[y][x].getState() != TileStates.OPENED && this.tiles[y][x].getState() != TileStates.EXPLODED))
+                    // If at least one tile that should be opened to win the game isn't, the game is not won 
                     return false;
             }
         }
@@ -176,34 +175,48 @@ public class MineField {
      * Convert the mine field to readable format
     */
     public String toString() {
+        //#region Write top coordinates of the table (X)
+        // Write the empty top left corner
         String output = "   |";
-        // Print top coordinates
+
+        // Go through each column
         for (int x = 0; x < this.width; x++) {
+            // Write top coordinates of the table (X)
             String coord = InputHandler.parseToAlphabetNumber(x);
             for (int i = coord.length(); i < 3; i++)
                 coord += " ";
+            // Write line divisor
             coord += "|";
             output += coord;
         }
         output += "\n";
+        //#endregion
 
-        // Print line divisor
-        for (int x = 0; x <= this.width; x++) {
+        //#region Write line divisor
+        // Go through each column
+        for (int x = 0; x <= this.width; x++)
             output += "---+";
-        }
         output += "\n";
+        //#endregion
 
-        // Go through each tile
+        //#region Write the tile data
+        // Go through each row
         for (int y = 0; y < this.height; y++) {
+            // Write left coordinates of the table (Y)
             String coord = Integer.toString(y + 1);
+            // Complete with spaces so it aligns to the table
             for (int i = coord.length(); i < 3; i++)
                 coord += " ";
+            // Write line divisor
             output += coord + "|";
+            // Write each the of the current row
             for (int x = 0; x < this.width; x++) {
                 output += tiles[y][x];
             }
+            // New line for the next row
             output += "\n";
         }
+        //#endregion
 
         return output;
     }
@@ -221,6 +234,7 @@ public class MineField {
     public int getFlags() {
         int counter = 0;
 
+        // Go through each tile
         for (Tile[] row : tiles) {
             for (Tile tile : row) {
                 if (tile.getState() == TileStates.MARKED_FLAG)
@@ -236,11 +250,17 @@ public class MineField {
     private boolean isValidCoord(int x, int y) {
         return (x >= 0 && x < width) && (y >= 0 && y < height);
     }
+    private int[] indexToCoords(int index) {
+        return new int[] { index % width, index / width }; 
+    }
+    private int coordsToIndex(int x, int y) {
+        return y * width + x;
+    }    
     private int countMinesNear(int x, int y, boolean[][] minedTiles) {
         int minesNear = 0;
-        // Go through each tile which is inside 3x3 square centered aroung the target tile
-        for (int deltaY = -1; deltaY < 2; deltaY++) {
-            for (int deltaX = -1; deltaX < 2; deltaX++) {
+        // Go through each adjacent tile
+        for (int deltaY = -1; deltaY <= 1; deltaY++) {
+            for (int deltaX = -1; deltaX <= 1; deltaX++) {
                 // Caclulate its coordinates
                 int checkX = x + deltaX;
                 int checkY = y + deltaY;
@@ -253,11 +273,19 @@ public class MineField {
         }
         return minesNear;
     }
-    private int[] indexToCoords(int index) {
-        return new int[] { index % width, index / width }; 
+    private void recursivelyOpenAround(int x, int y) {
+        // Go through 8 adjacent tiles
+        for (int deltaY = -1; deltaY <= 1; deltaY++) {
+            for (int deltaX = -1; deltaX <= 1; deltaX++) {
+                int checkX = x + deltaX;
+                int checkY = y + deltaY;
+                if (this.isValidCoord(checkX, checkY)) {
+                    if (this.tiles[checkY][checkX].getState() != TileStates.OPENED)
+                        // Open the adjacent is not already opened, open it
+                        openAt(checkX, checkY);
+                }
+            }
+        }
     }
-    private int coordsToIndex(int x, int y) {
-        return y * width + x;
-    }    
     //#endregion
 }

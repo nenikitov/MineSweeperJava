@@ -1,7 +1,7 @@
 package tiles;
 
 /**
- * The list of all the tile state
+ * The list of all the tile states
  */
 public enum TileStates {
     //#region enum entries

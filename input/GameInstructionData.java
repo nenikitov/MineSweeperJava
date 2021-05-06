@@ -16,6 +16,7 @@ public class GameInstructionData {
      * @param arguments The arguments that are passed with the action
      */
     public GameInstructionData(GameCommands type, String[] arguments) {
+        // Check if it has invalid number of arguments
         if (type.getNumberOfArguments() != arguments.length)
             throw new IllegalArgumentException(
                 "The number of arguments is invalid. "
@@ -25,17 +26,13 @@ public class GameInstructionData {
         this.type = type;
         this.arguments = arguments;
 
-        try {
-            switch (this.type) {
-                case TILE_MARK_CLEAR: case TILE_MARK_FLAG: case TILE_MARK_QUESTION: case TILE_OPEN:
-                    this.transformArgumentsToCoords();
-                    break;
-                default:
-                    break;
-            }
-        }
-        catch (IllegalArgumentException e) {
-            throw e;
+        // Transform to coodrinates if the interaction works with coordinates
+        switch (this.type) {
+            case TILE_MARK_CLEAR: case TILE_MARK_FLAG: case TILE_MARK_QUESTION: case TILE_OPEN:
+                this.transformArgumentsToCoords();
+                break;
+            default:
+                break;
         }
     }
     //#endregion
@@ -66,13 +63,14 @@ public class GameInstructionData {
         //#region Both arguments as numbers
         int numberArgument0;
         int numberArgument1;
-        
+        // First argument
         try {
             numberArgument0 = Integer.parseInt(this.arguments[0]);
         }
         catch (NumberFormatException e) {
             numberArgument0 = -1;
         }
+        // Second argument
         try {
             numberArgument1 = Integer.parseInt(this.arguments[1]);
         }
@@ -83,13 +81,14 @@ public class GameInstructionData {
         //#region Both arguments as alphabet numbers
         int alphabetArgument0;
         int alphabetArgument1;
-
+        // First argument
         try {
             alphabetArgument0 = InputHandler.parseFromAlphabetNumber(this.arguments[0]);
         }
         catch (NumberFormatException e) {
             alphabetArgument0 = -1;
         }
+        // Second argument
         try {
             alphabetArgument1 = InputHandler.parseFromAlphabetNumber(this.arguments[1]);
         }
@@ -103,6 +102,7 @@ public class GameInstructionData {
         // Verify the validity of 2 configuraions (coordinates "3 a" and "a 3" should be both valid)
         boolean validConfigAlphabet0Number1 = alphabetArgument0 != -1 && numberArgument1 != -1;
         boolean validConfigNumber0Alphabet1 = numberArgument0 != -1 && alphabetArgument1 != -1;
+        // If none of the configurations is valid - error
         if (!(validConfigAlphabet0Number1 || validConfigNumber0Alphabet1))
             throw new IllegalArgumentException("The coordinates are not given in the right format (like \"5 a\" or \"a 5\").");
         //#endregion
@@ -116,6 +116,7 @@ public class GameInstructionData {
             arguments[0] = Integer.toString(alphabetArgument1);
             arguments[1] = Integer.toString(numberArgument0 - 1);
         }
+        //#endregion
     }
     //#endregion
 
@@ -126,12 +127,15 @@ public class GameInstructionData {
      * @return The command
      */
     public static GameCommands findGameCommand(String text) {
+        // For each game command
         for (GameCommands action : GameCommands.values()) {
             for (String alias : action.getAliases()) {
                 if (alias.equals(text))
+                    // One of the aliases matched - this is the right command
                     return action;
             }
         }
+        // No command found - error
         throw new IllegalArgumentException("The \"" + text + "\" is a unknown command.");
     }
     //#endregion
