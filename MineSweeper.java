@@ -75,7 +75,7 @@ public class MineSweeper {
                 System.out.println(mineField);
 
                 GameInstructionData instruction = InputHandler.promptGameInstruction();
-                
+
                 switch (instruction.getType()) {
                     case GAME_HELP: {
                         //#region Print game documentation
@@ -89,7 +89,7 @@ public class MineSweeper {
                         // Get the confirmation
                         System.out.println("You want to retry the game. (Play the game with the same settings)");
                         boolean result = InputHandler.promptBoolean();
-                        
+
                         // Retry if the confirmation was recieved
                         if (result)
                             continue GameReset;
@@ -101,7 +101,7 @@ public class MineSweeper {
                         // Get the confirmation
                         System.out.println("You want to quit the game.");
                         boolean result = InputHandler.promptBoolean();
-                        
+
                         // Quit if the confirmation was recieved
                         if (result)
                             return;
@@ -113,7 +113,7 @@ public class MineSweeper {
                         // Get the confirmation
                         System.out.println("You want to restart the game. (Set the different difficulty and play again)");
                         boolean result = InputHandler.promptBoolean();
-                        
+
                         // Restart if the confirmation was recieved
                         if (result) {
                             shouldAskForDifficulty = true;
@@ -195,7 +195,7 @@ public class MineSweeper {
                 }
             }
             //#endregion
-            
+
             //#region End game screen
             printEndGameScreen(mineField);
             int choice = InputHandler.promptNumber(1, 4);
@@ -207,74 +207,17 @@ public class MineSweeper {
         }
         //#endregion
     }
-    
-    private static void printEndGameScreen(MineField mineField) {
-        boolean gameWon = mineField.isGameWon();
-        System.out.println("============================");
-        System.out.println("GAME FINISHED: ");
-        System.out.println(gameWon ? "You opened all empty tiles..." : "You opened too many mined tiles...");
-        System.out.println(gameWon ? "You won!" : "You lost!");
-        System.out.println();
-        System.out.println("Final minefield state: ");
-        System.out.println(mineField);
-        System.out.println();
-        System.out.println("What you would like to do?");
-        System.out.println("1\tReplay the game with the same settings");
-        System.out.println("2\tChange the difficulty and replay the game");
-        System.out.println("3\tQuit the game");
-    }
 
-    private static void markQuestionTile(MineField mineField, int x, int y) {
-        TileInteractionResults interactionResult = mineField.markQuestionAt(x, y);
-        //#region Print the confirmation message
-        if (interactionResult == TileInteractionResults.INVALID_TILE) {
-            System.out.println("You cannot mark this tile with a question, it is not interactable.");
-            System.out.println("This turn is skipped...");
-        }
-        else if (interactionResult == TileInteractionResults.SUCCESS)
-            System.out.println("Sucessfully marked this tile with a question.");
-        //#endregion
-    }
+    //#region Helper methods
 
-    private static TileInteractionResults openTile(MineField mineField, Player player, int x, int y) {
-        TileInteractionResults interactionResult = mineField.openAt(x, y);
-        //#region Print the confirmation message
-        if (interactionResult == TileInteractionResults.INVALID_TILE) {
-            System.out.println("You cannot open this tile, it is not interactable.");
-            System.out.println("This turn is skipped...");
-        }
-        else if (interactionResult == TileInteractionResults.EXPLOSION)
-            System.out.println("This tile contained a mine.");
-        else
-            System.out.println("Sucessfully opened this tile.");
-        return interactionResult;
-        //#endregion
-    }
 
-    private static void markFlagTile(MineField mineField, int x, int y) {
-        TileInteractionResults interactionResult = mineField.markFlagAt(x, y);
-        //#region Print the confirmation message
-        if (interactionResult == TileInteractionResults.INVALID_TILE) {
-            System.out.println("You cannot mark this tile with a flag, it is not interactable.");
-            System.out.println("This turn is skipped...");
-        }
-        else if (interactionResult == TileInteractionResults.SUCCESS)
-            System.out.println("Sucessfully marked this tile with a flag.");
-        //#endregion
+    private static void printTheDifficulties(Difficulties[] difficulties) {
+        System.out.println("Select the difficulty:");
+        System.out.println("Option  | Name                                    | Description                                     | Dimensions        | Mine percentage   | Player lives");
+        System.out.println("--------+-----------------------------------------+-------------------------------------------------+-------------------+-------------------+-------------");
+        for (int i = 0; i < difficulties.length; i++)
+            System.out.println((i + 1) + "\t| " + difficulties[i]);
     }
-
-    private static void markClearTile(MineField mineField, int x, int y) {
-        TileInteractionResults interactionResult = mineField.markClearAt(x, y);
-        //#region Print the confirmation message
-        if (interactionResult == TileInteractionResults.INVALID_TILE) {
-            System.out.println("You cannot clear the marks of this tile, it is not interactable.");
-            System.out.println("This turn is skipped...");
-        }
-        else if (interactionResult == TileInteractionResults.SUCCESS)
-            System.out.println("Sucessfully cleared the marks from this tile.");
-        //#endregion
-    }
-
     private static void printHelp() {
         System.out.println("===== HELP PAGE =====");
         System.out.println("=== How to play ===");
@@ -290,12 +233,67 @@ public class MineSweeper {
 
         System.out.println();
     }
-
-    private static void printTheDifficulties(Difficulties[] difficulties) {
-        System.out.println("Select the difficulty:");
-        System.out.println("Option  | Name                                    | Description                                     | Dimensions        | Mine percentage   | Player lives");
-        System.out.println("--------+-----------------------------------------+-------------------------------------------------+-------------------+-------------------+-------------");
-        for (int i = 0; i < difficulties.length; i++)
-            System.out.println((i + 1) + "\t| " + difficulties[i]);
+    private static void printEndGameScreen(MineField mineField) {
+        boolean gameWon = mineField.isGameWon();
+        System.out.println("============================");
+        System.out.println("GAME FINISHED: ");
+        System.out.println(gameWon ? "You opened all empty tiles..." : "You opened too many mined tiles...");
+        System.out.println(gameWon ? "You won!" : "You lost!");
+        System.out.println();
+        System.out.println("Final minefield state: ");
+        System.out.println(mineField);
+        System.out.println();
+        System.out.println("What you would like to do?");
+        System.out.println("1\tReplay the game with the same settings");
+        System.out.println("2\tChange the difficulty and replay the game");
+        System.out.println("3\tQuit the game");
     }
+    private static TileInteractionResults openTile(MineField mineField, Player player, int x, int y) {
+        TileInteractionResults interactionResult = mineField.openAt(x, y);
+        //#region Print the confirmation message
+        if (interactionResult == TileInteractionResults.INVALID_TILE) {
+            System.out.println("You cannot open this tile, it is not interactable.");
+            System.out.println("This turn is skipped...");
+        }
+        else if (interactionResult == TileInteractionResults.EXPLOSION)
+            System.out.println("This tile contained a mine.");
+        else
+            System.out.println("Sucessfully opened this tile.");
+        return interactionResult;
+        //#endregion
+    }
+    private static void markFlagTile(MineField mineField, int x, int y) {
+        TileInteractionResults interactionResult = mineField.markFlagAt(x, y);
+        //#region Print the confirmation message
+        if (interactionResult == TileInteractionResults.INVALID_TILE) {
+            System.out.println("You cannot mark this tile with a flag, it is not interactable.");
+            System.out.println("This turn is skipped...");
+        }
+        else if (interactionResult == TileInteractionResults.SUCCESS)
+            System.out.println("Sucessfully marked this tile with a flag.");
+        //#endregion
+    }
+    private static void markQuestionTile(MineField mineField, int x, int y) {
+        TileInteractionResults interactionResult = mineField.markQuestionAt(x, y);
+        //#region Print the confirmation message
+        if (interactionResult == TileInteractionResults.INVALID_TILE) {
+            System.out.println("You cannot mark this tile with a question, it is not interactable.");
+            System.out.println("This turn is skipped...");
+        }
+        else if (interactionResult == TileInteractionResults.SUCCESS)
+            System.out.println("Sucessfully marked this tile with a question.");
+        //#endregion
+    }
+    private static void markClearTile(MineField mineField, int x, int y) {
+        TileInteractionResults interactionResult = mineField.markClearAt(x, y);
+        //#region Print the confirmation message
+        if (interactionResult == TileInteractionResults.INVALID_TILE) {
+            System.out.println("You cannot clear the marks of this tile, it is not interactable.");
+            System.out.println("This turn is skipped...");
+        }
+        else if (interactionResult == TileInteractionResults.SUCCESS)
+            System.out.println("Sucessfully cleared the marks from this tile.");
+        //#endregion
+    }
+    //#endregion
 }
