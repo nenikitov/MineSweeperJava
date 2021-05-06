@@ -9,13 +9,18 @@ import tiles.TileInteractionResults;
 public class MineSweeper {
     public static void main(String[] args) {
         //#region Initial setup
+        // Objects
         Player player;
         MineField mineField;
+        // Difficulty
+        boolean shouldAskForDifficulty = true;
         int width = 0;
         int height = 0;
         double minePercentage = 0;
         int playerLives = 0;
-        boolean shouldAskForDifficulty = true;
+        // Gameplay
+        boolean gameLost = false;
+        boolean gameWon = false;
         //#endregion
 
         //#region Game loop (with/without difficulty selection and with game reset)
@@ -42,9 +47,9 @@ public class MineSweeper {
                 }
                 else {
                     System.out.println("=== WIDTH ===");
-                    width = InputHandler.promptNumber(3, 51);
+                    width = InputHandler.promptNumber(5, 51);
                     System.out.println("=== HEIGHT ===");
-                    height = InputHandler.promptNumber(3, 51);
+                    height = InputHandler.promptNumber(5, 51);
                     System.out.println("=== MINE PERCENTAGE ===");
                     minePercentage = InputHandler.promptNumber(5, 31) / 100.0;
                     System.out.println("=== PLAYER LIVES ===");
@@ -60,9 +65,8 @@ public class MineSweeper {
             //#endregion
 
             //#region Gameplay loop
-            boolean gameLost = false;
-            boolean gameWon = false;
             while (!(gameLost || gameWon)) {
+                // Initial print
                 System.out.println();
                 System.out.println("============================");
                 System.out.println("Lives Left   : " + player.getLives());
@@ -75,6 +79,7 @@ public class MineSweeper {
                 
                 switch (instruction.getType()) {
                     case GAME_HELP: {
+                        //#region Print game documentation
                         System.out.println("===== HELP PAGE =====");
                         System.out.println("=== How to play ===");
                         System.out.println("\tWhat you were seeing is the grid of the mine field.");
@@ -89,9 +94,11 @@ public class MineSweeper {
 
                         System.out.println();
                         InputHandler.promptEnter();
+                        //#endregion
                         break;
                     }
                     case GAME_INSTANT_RETRY: {
+                        //#region Ask if the user is sure and restart the game with the same settings
                         // Get the confirmation
                         System.out.println("You want to retry the game. (Play the game with the same settings)");
                         boolean result = InputHandler.promptBoolean();
@@ -99,10 +106,11 @@ public class MineSweeper {
                         // Retry if the confirmation was recieved
                         if (result)
                             continue GameReset;
-                        
+                        //#endregion
                         break;
                     }
                     case GAME_QUIT: {
+                        //#region Ask if the user is sure and quit the game
                         // Get the confirmation
                         System.out.println("You want to quit the game.");
                         boolean result = InputHandler.promptBoolean();
@@ -110,10 +118,11 @@ public class MineSweeper {
                         // Quit if the confirmation was recieved
                         if (result)
                             return;
-                        
+                        //#endregion
                         break;
                     }
                     case GAME_RESTART: {
+                        //#region Ask if the user is sure and restart the game with different settings
                         // Get the confirmation
                         System.out.println("You want to restart the game. (Set the different difficulty and play again)");
                         boolean result = InputHandler.promptBoolean();
@@ -123,10 +132,11 @@ public class MineSweeper {
                             shouldAskForDifficulty = true;
                             continue GameReset;
                         }
-                        
+                        //#endregion
                         break;
                     }
                     case TILE_MARK_CLEAR: {
+                        //#region Clear the marks of the tile
                         // Get coords of the input
                         int x = Integer.parseInt(instruction.getArguments()[0]);
                         int y = Integer.parseInt(instruction.getArguments()[1]);
@@ -146,9 +156,11 @@ public class MineSweeper {
                             System.out.println(e.getMessage());
                             System.out.println("This turn is skipped...");
                         }
+                        //#endregion
                         break;
                     }
                     case TILE_MARK_FLAG: {
+                        //#region Mark the tile with the flag
                         // Get coords of the input
                         int x = Integer.parseInt(instruction.getArguments()[0]);
                         int y = Integer.parseInt(instruction.getArguments()[1]);
@@ -168,9 +180,11 @@ public class MineSweeper {
                             System.out.println(e.getMessage());
                             System.out.println("This turn is skipped...");
                         }
+                        //#endregion
                         break;
                     }
                     case TILE_MARK_QUESTION: {
+                        //#region Mark the tile with the question
                         // Get coords of the input
                         int x = Integer.parseInt(instruction.getArguments()[0]);
                         int y = Integer.parseInt(instruction.getArguments()[1]);
@@ -190,9 +204,11 @@ public class MineSweeper {
                             System.out.println(e.getMessage());
                             System.out.println("This turn is skipped...");
                         }
+                        //#endregion
                         break;
                     }
                     case TILE_OPEN: {
+                        //#region Open the tile
                         // Get coords of the input
                         int x = Integer.parseInt(instruction.getArguments()[0]);
                         int y = Integer.parseInt(instruction.getArguments()[1]);
@@ -218,6 +234,7 @@ public class MineSweeper {
                             System.out.println(e.getMessage());
                             System.out.println("This turn is skipped...");
                         }
+                        //#endregion
                         break;
                     }
                 }
