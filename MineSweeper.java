@@ -46,13 +46,14 @@ public class MineSweeper {
                     playerLives = selectedDifficulty.getPlayerLives();
                 }
                 else {
-                    System.out.println("=== WIDTH ===");
+                    System.out.println("Please set up the custom difficulty:");
+                    System.out.println("Enter the width of the mine field:");
                     width = InputHandler.promptNumber(5, 51);
-                    System.out.println("=== HEIGHT ===");
+                    System.out.println("Enter the height of the mine field:");
                     height = InputHandler.promptNumber(5, 51);
-                    System.out.println("=== MINE PERCENTAGE ===");
+                    System.out.println("Enter the percentage of the mine tiles:");
                     minePercentage = InputHandler.promptNumber(5, 31) / 100.0;
-                    System.out.println("=== PLAYER LIVES ===");
+                    System.out.println("Enter how many lives the player has:");
                     playerLives = InputHandler.promptNumber(1, 11);
                 }
             }
