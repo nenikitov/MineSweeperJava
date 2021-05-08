@@ -5,11 +5,11 @@ package tiles;
  */
 public enum TileStates {
     //#region enum entries
-    CLOSED           ('#'),
+    CLOSED           ('\u25A0'),
     OPENED           (' '),
-    MARKED_FLAG      ('P'),
+    MARKED_FLAG      ('\u2691'),
     MARKED_QUESTION  ('?'),
-    EXPLODED         ('*');
+    EXPLODED         ('\u0436');
     //#endregion
 
     //#region Fields
