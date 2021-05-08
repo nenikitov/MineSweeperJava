@@ -10,3 +10,5 @@ echo Main-Class: MineSweeper > Manifest.txt
 jar -cfm MineSweeper.jar Manifest.txt *
 :: Create a .bat executable
 echo java -jar MineSweeper.jar > MineSweeper.bat
+:: ZIP
+zip build.zip MineSweeper.bat MineSweeper.jar
