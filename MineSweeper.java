@@ -258,7 +258,7 @@ public class MineSweeper {
         else if (interactionResult == TileInteractionResults.EXPLOSION)
             System.out.println("This tile contained a mine.");
         else
-            System.out.println("Sucessfully opened this tile.");
+            System.out.println("Successfully opened this tile.");
         return interactionResult;
         //#endregion
     }
@@ -270,7 +270,7 @@ public class MineSweeper {
             System.out.println("This turn is skipped...");
         }
         else if (interactionResult == TileInteractionResults.SUCCESS)
-            System.out.println("Sucessfully marked this tile with a flag.");
+            System.out.println("Successfully marked this tile with a flag.");
         //#endregion
     }
     private static void markQuestionTile(MineField mineField, int x, int y) {
@@ -281,7 +281,7 @@ public class MineSweeper {
             System.out.println("This turn is skipped...");
         }
         else if (interactionResult == TileInteractionResults.SUCCESS)
-            System.out.println("Sucessfully marked this tile with a question.");
+            System.out.println("Successfully marked this tile with a question.");
         //#endregion
     }
     private static void markClearTile(MineField mineField, int x, int y) {
@@ -292,7 +292,7 @@ public class MineSweeper {
             System.out.println("This turn is skipped...");
         }
         else if (interactionResult == TileInteractionResults.SUCCESS)
-            System.out.println("Sucessfully cleared the marks from this tile.");
+            System.out.println("Successfully cleared the marks from this tile.");
         //#endregion
     }
     //#endregion
