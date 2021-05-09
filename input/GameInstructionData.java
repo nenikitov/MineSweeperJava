@@ -26,7 +26,7 @@ public class GameInstructionData {
         this.type = type;
         this.arguments = arguments;
 
-        // Transform to coodrinates if the interaction works with coordinates
+        // Transform to coordinates if the interaction works with coordinates
         switch (this.type) {
             case TILE_MARK_CLEAR: case TILE_MARK_FLAG: case TILE_MARK_QUESTION: case TILE_OPEN:
                 this.transformArgumentsToCoords();
@@ -99,7 +99,7 @@ public class GameInstructionData {
         //#endregion
 
         //#region Check if there is a valid configuration (one of the coordinates should be represented as a number, the other as alphabet)
-        // Verify the validity of 2 configuraions (coordinates "3 a" and "a 3" should be both valid)
+        // Verify the validity of 2 configurations (coordinates "3 a" and "a 3" should be both valid)
         boolean validConfigAlphabet0Number1 = alphabetArgument0 != -1 && numberArgument1 != -1;
         boolean validConfigNumber0Alphabet1 = numberArgument0 != -1 && alphabetArgument1 != -1;
         // If none of the configurations is valid - error

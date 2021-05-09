@@ -5,7 +5,7 @@ package difficulty;
  */
 public enum Difficulties {
     //#region Enum entries
-    CUSTOM ("Mine Your own Custom Mine Field"  , "Set up the difficulty yourself"           , 0 , 0 , 0   , 0),
+    CUSTOM ("Mine Your own Custom Minefield"  , "Set up the difficulty yourself"           , 0 , 0 , 0   , 0),
     TRIVIAL("Piece of Cake"                    , "Easy mode for beginners"                  , 8 , 6 , 0.1 , 2),
     EASY   ("Mine Me Plenty"                   , "A bit harder, but still easy"             , 10, 8 , 0.12, 2),
     NORMAL ("Thou Art a Defuse Meister"        , "The right mode for intermediate players"  , 15, 8 , 0.15, 1),
@@ -35,14 +35,14 @@ public enum Difficulties {
 
     //#region Getters
     /**
-     * Get the width of the mine field from the difficulty
+     * Get the width of the minefield from the difficulty
      * @return The width
      */
     public int getWidth() {
         return this.width;
     }
     /**
-     * Get the height of the mine field from the difficulty
+     * Get the height of the minefield from the difficulty
      * @return The height
      */
     public int getHeight() {
@@ -80,7 +80,7 @@ public enum Difficulties {
         output += this.description;
         output = completeDescription(output, 90);
 
-        // Add mine field dimenstions and align it
+        // Add minefield dimensions and align it
         output += (this.width != 0 && this.height != 0) ? this.width + "x" + this.height : "N.A.";
         output = completeDescription(output, 110);
         

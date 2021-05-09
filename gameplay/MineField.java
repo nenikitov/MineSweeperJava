@@ -7,7 +7,7 @@ import tiles.TileInteractionResults;
 import tiles.TileStates;
 
 /**
- * The class that generates and stores the state of the gameplay mine field. Is used to interact with tiles
+ * The class that generates and stores the state of the gameplay minefield. Is used to interact with tiles
  */
 public class MineField {
     //#region Fields
@@ -20,8 +20,8 @@ public class MineField {
 
     //#region Constructors
     /**
-     * Initialize the mine field object
-     * @param widt The width of a playing field
+     * Initialize the minefield object
+     * @param width The width of a playing field
      * @param height The height of a playing field
      * @param minePercentage The difficulty (percentage from 0 to 1) that indicated the mine count
      */
@@ -89,9 +89,9 @@ public class MineField {
      * @return The result of the interaction {@link TileInteractionResults}
      */
     public TileInteractionResults openAt(int x, int y) {
-        // Check if the tile is inside the mine field
+        // Check if the tile is inside the minefield
         if (!isValidCoord(x, y))
-            throw new IndexOutOfBoundsException("The coordinates are outside the mine field.");
+            throw new IndexOutOfBoundsException("The coordinates are outside the minefield.");
 
         // If it is the first move - generate mines
         if (!this.isPopulated)
@@ -115,9 +115,9 @@ public class MineField {
      * @return The result of the interaction {@link TileInteractionResults}
      */
     public TileInteractionResults markFlagAt(int x, int y) {
-        // Check if the tile is inside the mine field
+        // Check if the tile is inside the minefield
         if (!isValidCoord(x, y))
-            throw new IndexOutOfBoundsException("The coordinates are outside the mine field.");
+            throw new IndexOutOfBoundsException("The coordinates are outside the minefield.");
 
         // Mark the tile with a flag
         return tiles[y][x].markFlag();
@@ -129,9 +129,9 @@ public class MineField {
      * @return The result of the interaction {@link TileInteractionResults}
      */
     public TileInteractionResults markQuestionAt(int x, int y) {
-        // Check if the tile is inside the mine field
+        // Check if the tile is inside the minefield
         if (!isValidCoord(x, y))
-            throw new IndexOutOfBoundsException("The coordinates are outside the mine field.");
+            throw new IndexOutOfBoundsException("The coordinates are outside the minefield.");
 
         // Mark the tile with a question
         return tiles[y][x].markQuestion();
@@ -143,9 +143,9 @@ public class MineField {
      * @return The result of the interaction {@link TileInteractionResults}
      */
     public TileInteractionResults markClearAt(int x, int y) {
-        // Check if the tile is inside the mine field
+        // Check if the tile is inside the minefield
         if (!isValidCoord(x, y))
-            throw new IndexOutOfBoundsException("The coordinates are outside the mine field.");
+            throw new IndexOutOfBoundsException("The coordinates are outside the minefield.");
 
         // Clear the marks from the tile
         return tiles[y][x].markClear();
@@ -172,7 +172,7 @@ public class MineField {
 
     //#region Other
     /** 
-     * Convert the mine field to readable format
+     * Convert the minefield to readable format
     */
     public String toString() {
         //#region Write top coordinates of the table (X)
@@ -261,7 +261,7 @@ public class MineField {
         // Go through each adjacent tile
         for (int deltaY = -1; deltaY <= 1; deltaY++) {
             for (int deltaX = -1; deltaX <= 1; deltaX++) {
-                // Caclulate its coordinates
+                // Calculate its coordinates
                 int checkX = x + deltaX;
                 int checkY = y + deltaY;
                 // If it is valid (inside the field) and if it contains a mine - increment the counter

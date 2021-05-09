@@ -1,7 +1,7 @@
 package tiles;
 
 /**
- * The class that represents the tile in the mine field
+ * The class that represents the tile in the minefield
  */
 public class Tile {
     //#region Fields

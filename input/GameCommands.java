@@ -46,7 +46,7 @@ public enum GameCommands {
     }
     /**
      * Generate the documentation for the command
-     * @return Detatiled documentation
+     * @return Detailed documentation
      */
     public String getDocumentation() {
         // Start with empty documentation

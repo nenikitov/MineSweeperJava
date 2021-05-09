@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class InputHandler {
     //#region Fields
     private static final Scanner SCANNER = new Scanner(System.in);
-    private static final String REENTER_MESSAGE = "Please reenter :";
+    private static final String REENTER_MESSAGE = "Please re-enter :";
     //#endregion
 
     //#region Getting the input from the user
@@ -48,7 +48,7 @@ public class InputHandler {
     }
     /**
      * Prompt user the number
-     * @param min Mininum number that the user can enter (inclusive)
+     * @param min Minimum number that the user can enter (inclusive)
      * @param max Maximum number that the user can enter (exclusive)
      * @return A valid number that the user entered
      */

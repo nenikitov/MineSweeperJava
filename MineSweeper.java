@@ -34,7 +34,7 @@ public class MineSweeper {
                 // Ask the option
                 int difficultyIndex = InputHandler.promptNumber(1, difficulties.length + 1) - 1;
                 if (difficultyIndex != 0) {
-                    // If not a custom difficutly, assign predefined values
+                    // If not a custom difficulty, assign predefined values
                     Difficulties selectedDifficulty = difficulties[difficultyIndex];
                     width = selectedDifficulty.getWidth();
                     height = selectedDifficulty.getHeight();
@@ -43,9 +43,9 @@ public class MineSweeper {
                 }
                 else {
                     System.out.println("Please set up the custom difficulty:");
-                    System.out.println("=== Enter the width of the mine field: ===");
+                    System.out.println("=== Enter the width of the minefield: ===");
                     width = InputHandler.promptNumber(5, 51);
-                    System.out.println("=== Enter the height of the mine field: ===");
+                    System.out.println("=== Enter the height of the minefield: ===");
                     height = InputHandler.promptNumber(5, 51);
                     System.out.println("=== Enter the percentage of the mine tiles: ===");
                     minePercentage = InputHandler.promptNumber(5, 31) / 100.0;
@@ -83,7 +83,7 @@ public class MineSweeper {
                         System.out.println("You want to retry the game. (Play the game with the same settings)");
                         boolean result = InputHandler.promptBoolean();
 
-                        // Retry if the confirmation was recieved
+                        // Retry if the confirmation was received
                         if (result)
                             continue GameReset;
                         //#endregion
@@ -95,7 +95,7 @@ public class MineSweeper {
                         System.out.println("You want to quit the game.");
                         boolean result = InputHandler.promptBoolean();
 
-                        // Quit if the confirmation was recieved
+                        // Quit if the confirmation was received
                         if (result)
                             return;
                         //#endregion
@@ -107,7 +107,7 @@ public class MineSweeper {
                         System.out.println("You want to restart the game. (Set the different difficulty and play again)");
                         boolean result = InputHandler.promptBoolean();
 
-                        // Restart if the confirmation was recieved
+                        // Restart if the confirmation was received
                         if (result) {
                             shouldAskForDifficulty = true;
                             continue GameReset;
@@ -221,10 +221,10 @@ public class MineSweeper {
     private static void printHelp() {
         System.out.println("===== HELP PAGE =====");
         System.out.println("=== How to play ===");
-        System.out.println("\tWhat you were seeing is the grid of the mine field.");
-        System.out.println("\tThe point of the game is to open all the tiles that do not coontain mines, while avoiding mine tiles.");
+        System.out.println("\tWhat you were seeing is the grid of the minefield.");
+        System.out.println("\tThe point of the game is to open all the tiles that do not contain mines, while avoiding mine tiles.");
         System.out.println("\t* Opening a mine tile will decrement the number of your lives. This can result into game over!");
-        System.out.println("\t* Opeining an empty tile reveals the number of mines in adjacent tiles.");
+        System.out.println("\t* Opening an empty tile reveals the number of mines in adjacent tiles.");
         System.out.println("=== Controls ===");
         System.out.println("\tHow to call?        | Arguments?        | What does it do?");
         System.out.println("\t--------------------+-------------------+-----------------");
@@ -237,7 +237,7 @@ public class MineSweeper {
         boolean gameWon = mineField.isGameWon();
         System.out.println("============================");
         System.out.println("GAME FINISHED: ");
-        System.out.println(gameWon ? "You opened all empty tiles..." : "You opened too many mined tiles...");
+        System.out.println(gameWon ? "You opened all the empty tiles..." : "You opened too many mined tiles...");
         System.out.println(gameWon ? "You won!" : "You lost!");
         System.out.println();
         System.out.println("Final minefield state: ");
