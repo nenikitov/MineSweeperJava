@@ -7,9 +7,9 @@ public enum TileStates {
     //#region enum entries
     CLOSED           ('\u25A0'),
     OPENED           (' '),
-    MARKED_FLAG      ('\u2691'),
+    MARKED_FLAG      ('P'),
     MARKED_QUESTION  ('?'),
-    EXPLODED         ('\u0436');
+    EXPLODED         ('x');
     //#endregion
 
     //#region Fields
